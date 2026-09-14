@@ -17,9 +17,12 @@
             theme: {
                 extend: {
                     colors: {
-                        burgundy: '#800020',
-                        darkred: '#5B0E1B',
-                        cream: '#FCF9F6'
+                        burgundy: '#5B0E1B',
+                        deepburgundy: '#3a0810',
+                        navy: '#070B14',
+                        ivory: '#FAF6EE',
+                        champagne: '#E5D4B3',
+                        gold: '#D4AF37'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -36,188 +39,158 @@
 
     <style>
         body { 
-            /* Deep dark red gradient */
-            background: linear-gradient(135deg, #0a0101 0%, #220308 50%, #0a0101 100%); 
-            color: #FCF9F6; 
+            background: linear-gradient(135deg, #070B14 0%, #1a050b 50%, #070B14 100%); 
+            color: #FAF6EE; 
             overflow-x: hidden; 
             position: relative;
         }
 
-        /* SVG Noise Texture Overlay */
+        /* Film Grain & Paper Texture Overlay */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
             pointer-events: none;
-            z-index: -1;
+            z-index: 999;
         }
 
-        /* Animated Motion Graphics */
-        .bg-graphic { position: fixed; filter: blur(100px); z-index: -2; pointer-events: none; border-radius: 50%; }
-        
-        .bg-graphic-1 {
-            top: -10%; left: -10%; width: 50vw; height: 50vw;
-            background: rgba(128, 0, 32, 0.5);
-            animation: drift1 20s infinite alternate ease-in-out;
-        }
-        .bg-graphic-2 {
-            bottom: -10%; right: -10%; width: 60vw; height: 60vw;
-            background: rgba(255, 255, 255, 0.05);
-            animation: drift2 25s infinite alternate ease-in-out;
-        }
-        
-        /* Floating Particles (Embers) */
-        .particle {
-            position: fixed;
-            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0;
-        }
+        /* Ambient Background Lighting */
+        .bg-graphic { position: fixed; filter: blur(120px); z-index: -2; pointer-events: none; border-radius: 50%; }
+        .bg-graphic-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(91, 14, 27, 0.4); animation: drift1 20s infinite alternate ease-in-out; }
+        .bg-graphic-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: rgba(7, 11, 20, 0.8); animation: drift2 25s infinite alternate ease-in-out; }
 
         @keyframes drift1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(10vw, 15vh) scale(1.2); } }
         @keyframes drift2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-15vw, -10vh) scale(1.1); } }
-        
+
+        /* Floating Embers */
+        .particle {
+            position: fixed;
+            background: radial-gradient(circle, rgba(229,212,179,0.8) 0%, rgba(229,212,179,0) 70%);
+            border-radius: 50%; pointer-events: none; z-index: -1; opacity: 0;
+            animation: floatUp 12s linear infinite;
+        }
         @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            0% { transform: translateY(100vh) scale(0.4); opacity: 0; }
             20% { opacity: 0.5; }
             80% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+            100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
         }
 
-        /* Premium Dark Glassmorphism Cards */
+        /* Scrapbook Glass Cards */
         .card { 
-            background: rgba(20, 3, 5, 0.5); 
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.12); 
-            border-radius: 24px; 
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05); 
+            background: rgba(250, 246, 238, 0.04); 
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(229, 212, 179, 0.15); 
+            border-radius: 20px; 
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(250, 246, 238, 0.1); 
             padding: 3rem 2rem; 
             margin-bottom: 3rem; 
-            position: relative; 
-            z-index: 10; 
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            position: relative; z-index: 10; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .card:hover { transform: translateY(-4px); }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        /* Smooth Scroll Reveal */
         .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-        
-        /* Polaroid Style */
-        .polaroid { background: white; padding: 12px 12px 32px 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(-2deg); transition: transform 0.3s ease; display: none; border: 1px solid #eaeaea; border-radius: 4px; }
+
+        /* Polaroids */
+        .polaroid { background: #FAF6EE; color: #333; padding: 12px 12px 32px 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transform: rotate(-2deg); transition: transform 0.3s ease; display: none; border-radius: 4px; }
         .polaroid.active { display: block; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .polaroid img { width: 100%; height: 320px; object-fit: cover; background-color: #f8f8f8; border-radius: 2px; }
+        .polaroid img { width: 100%; height: 320px; object-fit: cover; background-color: #eee; border-radius: 2px; }
         @keyframes popIn { from { opacity: 0; transform: scale(0.9) rotate(-5deg); } to { opacity: 1; transform: scale(1) rotate(-2deg); } }
-        
+
         /* Wheel */
-        .wheel-container { position: relative; width: 280px; height: 280px; margin: 2rem auto; border-radius: 50%; border: 6px solid #ffffff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden; }
+        .wheel-container { position: relative; width: 280px; height: 280px; margin: 2rem auto; border-radius: 50%; border: 6px solid #FAF6EE; box-shadow: 0 15px 40px rgba(0,0,0,0.7); overflow: hidden; }
         .wheel { width: 100%; height: 100%; border-radius: 50%; transition: transform 4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #ffffff; z-index: 10; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
-        
-        /* Custom Graphic Envelope */
-        .envelope-container { cursor: pointer; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); perspective: 1000px; display: inline-block; }
-        .envelope-container:hover { transform: scale(1.05); }
-        
+        .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #FAF6EE; z-index: 10; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
+
+        /* Custom Envelope & Slide-Out Paper */
+        .envelope-container { cursor: pointer; display: inline-block; perspective: 1000px; margin-top: 1rem; }
         .env-wrapper {
-            position: relative; width: 280px; height: 180px; margin: 0 auto;
-            background: #4a0b16; border-radius: 8px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.3);
-            overflow: hidden;
+            position: relative; width: 300px; height: 190px; margin: 0 auto;
+            background: #3a0810; border-radius: 6px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(229,212,179,0.3);
+            overflow: visible; transition: transform 0.4s ease;
         }
-        
-        /* Custom Gold Pattern Overlay */
-        .env-pattern {
-            position: absolute; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 4c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 4c3.3 0 6-2.7 6-6s-2.7-6-6-6-6 2.7-6 6 2.7 6 6 6z' fill='%23D4AF37' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
-            z-index: 1; opacity: 0.8;
-        }
-
-        /* Envelope Fold Lines */
-        .env-folds {
-            position: absolute; inset: 0;
-            background: #2a050b; 
-            clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
-            z-index: 2;
-        }
-        .env-folds::before {
-            content: ""; position: absolute; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 4c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 4c3.3 0 6-2.7 6-6s-2.7-6-6-6-6 2.7-6 6 2.7 6 6 6z' fill='%23D4AF37' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-
-        .env-flap-wrapper {
-            position: absolute; inset: 0; z-index: 3;
-            filter: drop-shadow(0 6px 8px rgba(0,0,0,0.7));
-        }
-
-        /* Top Flap */
+        .env-wrapper:hover { transform: scale(1.03); }
         .env-flap {
-            position: absolute; top: 0; left: 0; right: 0; height: 65%;
-            background: #3a0810; 
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            position: absolute; top: 0; left: 0; right: 0; height: 60%;
+            background: #5B0E1B; clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top; transition: transform 0.6s ease; z-index: 20;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        .env-flap::before {
-            content: ""; position: absolute; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 4c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 4c3.3 0 6-2.7 6-6s-2.7-6-6-6-6 2.7-6 6 2.7 6 6 6z' fill='%23D4AF37' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-
-        /* 3D Wax Seal */
+        .envelope-container.open .env-flap { transform: rotateX(180deg); z-index: 1; }
         .env-seal {
-            position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%);
-            width: 56px; height: 56px;
-            background: linear-gradient(135deg, #F4D068 0%, #AA771C 100%);
-            border-radius: 50%; z-index: 4;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Playfair Display', serif; font-weight: bold; font-size: 26px; color: #3a0810;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.4);
+            position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+            width: 52px; height: 52px; background: linear-gradient(135deg, #F4D068 0%, #AA771C 100%);
+            border-radius: 50%; z-index: 25; display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif; font-weight: bold; font-size: 24px; color: #3a0810;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.4);
+            transition: opacity 0.3s ease;
         }
+        .envelope-container.open .env-seal { opacity: 0; pointer-events: none; }
 
-        /* Clean physical paper for the letter */
-        .letter-content { 
-            display: none; margin-top: 3rem; background: #FCF9F6; color: #5B0E1B; 
-            line-height: 32px; font-size: 1.5rem; border-radius: 8px; padding: 2.5rem 2rem; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; 
+        /* Sliding Paper Letter */
+        .paper-letter {
+            position: absolute; left: 15px; right: 15px; bottom: 10px; height: 160px;
+            background: #FAF6EE; color: #3a0810; border-radius: 4px; padding: 20px;
+            z-index: 10; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.3); font-family: 'Caveat', cursive; font-size: 1.3rem; line-height: 1.4;
+            overflow: hidden; text-align: left;
         }
-        .letter-content::before {
-            content: ""; position: absolute; inset: 0; border-radius: 8px;
-            background: repeating-linear-gradient(transparent, transparent 31px, rgba(128,0,32,0.1) 31px, rgba(128,0,32,0.1) 32px);
+        .envelope-container.open .paper-letter { transform: translateY(-130px); height: 380px; z-index: 30; }
+
+        /* Full Expanded Letter View */
+        .full-letter-modal { display: none; margin-top: 2rem; background: #FAF6EE; color: #3a0810; border-radius: 12px; padding: 3rem 2.5rem; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: left; position: relative; }
+        .full-letter-modal::before {
+            content: ""; position: absolute; inset: 0; border-radius: 12px;
+            background: repeating-linear-gradient(transparent, transparent 31px, rgba(91,14,27,0.08) 31px, rgba(91,14,27,0.08) 32px);
             pointer-events: none;
         }
-        .letter-content.open { display: block; animation: unfold 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes unfold { from { opacity: 0; transform: translateY(-20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        
+        .full-letter-modal.open { display: block; animation: unfold 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes unfold { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        /* Cassette / Waveform Audio Player */
+        .cassette-player { background: linear-gradient(135deg, #1a050b 0%, #070B14 100%); border: 1px solid rgba(229,212,179,0.2); border-radius: 16px; padding: 1.2rem; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease; }
+        .cassette-player:hover { border-color: rgba(229,212,179,0.5); background: linear-gradient(135deg, #220308 0%, #111c3a 100%); }
+        .play-btn { width: 48px; height: 48px; background: #FAF6EE; color: #3a0810; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; transition: transform 0.2s; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+        .play-btn:hover { transform: scale(1.1); }
+        .waveform { display: flex; align-items: center; gap: 3px; height: 24px; }
+        .waveform span { width: 3px; background: rgba(229,212,179,0.4); border-radius: 3px; animation: pulseWave 1.2s infinite ease-in-out; }
+        .playing .waveform span { background: #E5D4B3; }
+        .waveform span:nth-child(1) { animation-delay: 0.1s; height: 10px; }
+        .waveform span:nth-child(2) { animation-delay: 0.3s; height: 20px; }
+        .waveform span:nth-child(3) { animation-delay: 0.2s; height: 15px; }
+        .waveform span:nth-child(4) { animation-delay: 0.4s; height: 24px; }
+        .waveform span:nth-child(5) { animation-delay: 0.1s; height: 12px; }
+        @keyframes pulseWave { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+
         /* Real Moon Phase */
         .moon { 
             width: 150px; height: 150px; border-radius: 50%; 
             background-image: url('https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&w=400&q=80');
-            background-size: 110%;
-            background-position: center;
-            box-shadow: 0 0 30px rgba(255,255,255,0.05); 
-            margin: 2.5rem auto; position: relative;
-            overflow: hidden;
+            background-size: 110%; background-position: center;
+            box-shadow: 0 0 30px rgba(255,255,255,0.05); margin: 2.5rem auto; position: relative; overflow: hidden;
         }
         .moon::before {
-            content: "";
-            position: absolute;
-            top: -5%; left: -10%;
-            width: 105%; height: 110%;
-            border-radius: 50%;
-            background: rgba(10, 2, 2, 0.98);
-            box-shadow: inset -10px 0 15px rgba(0,0,0,1);
+            content: ""; position: absolute; top: -5%; left: -10%; width: 105%; height: 110%;
+            border-radius: 50%; background: rgba(10, 2, 2, 0.98); box-shadow: inset -10px 0 15px rgba(0,0,0,1);
         }
+
+        /* Cinematic Dark Ending */
+        #cinematic-ending {
+            background: #000000; min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; z-index: 100;
+        }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
     </style>
 </head>
 <body class="antialiased py-12 px-4 max-w-2xl mx-auto">
 
-    <!-- Background Motion Graphics -->
+    <!-- Background Graphics -->
     <div class="bg-graphic bg-graphic-1"></div>
     <div class="bg-graphic bg-graphic-2"></div>
     <div id="particles"></div>
@@ -225,17 +198,17 @@
     <!-- 1. Header -->
     <div class="fade-in pt-4">
         <div class="card text-center pt-16 pb-16">
-            <h1 class="font-serif text-4xl md:text-5xl text-white mb-5 font-semibold tracking-tight leading-tight">Happy Birthday, My Everything</h1>
-            <p class="text-white/80 font-sans md:text-lg font-medium">Today we celebrate the most amazing person in my world 🎂</p>
+            <h1 class="font-serif text-4xl md:text-5xl text-ivory mb-5 font-semibold tracking-tight leading-tight">Happy Birthday, My Everything</h1>
+            <p class="text-champagne/80 font-sans md:text-lg font-medium">Today we celebrate the most amazing person in my world 🎂</p>
         </div>
     </div>
 
     <!-- 2. Confetti Explosion -->
     <div class="fade-in">
         <div class="card text-center">
-            <h2 class="font-serif text-2xl text-white mb-3 font-medium">Any thing you wish will become true</h2>
-            <p class="text-xs text-white/60 mb-10 uppercase tracking-[0.2em] font-bold">I LOVE YOU , NWNW</p>
-            <button onclick="fireConfetti()" class="bg-white hover:bg-gray-100 text-burgundy font-bold py-4 px-12 rounded-full shadow-[0_0_30px_rgba(255,255,255,0.3)] transform transition hover:scale-105 border border-white/20 tracking-wide">
+            <h2 class="font-serif text-2xl text-ivory mb-3 font-medium">Any thing you wish will become true</h2>
+            <p class="text-xs text-champagne/60 mb-10 uppercase tracking-[0.2em] font-bold">I LOVE YOU , NWNW</p>
+            <button onclick="fireConfetti()" class="bg-ivory hover:bg-champagne text-burgundy font-bold py-4 px-12 rounded-full shadow-[0_0_30px_rgba(250,246,238,0.2)] transform transition hover:scale-105 border border-champagne/30 tracking-wide">
                 🎂 MAKE A WISH 🎂
             </button>
         </div>
@@ -244,8 +217,8 @@
     <!-- 3. Photo Carousel 1 -->
     <div class="fade-in">
         <div class="card text-center">
-            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
-                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">Memories...</h3>
+            <div class="mb-10 inline-flex items-center justify-center border-b border-champagne/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-champagne tracking-[0.25em] uppercase">Memories...</h3>
             </div>
             <div id="carousel1" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(1)">
                 <div class="polaroid active"><img src="1.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">YOU WILL</p></div>
@@ -253,7 +226,7 @@
                 <div class="polaroid"><img src="3.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">BE MY</p></div>
                 <div class="polaroid"><img src="4.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">BEST</p></div>
                 <div class="polaroid"><img src="5.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">MEMORY</p></div>
-                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count1">1</span>/5)</p>
+                <p class="text-xs text-champagne/50 mt-8 font-medium tracking-widest transition group-hover:text-champagne/90">TAP TO CHANGE PHOTOS (<span id="count1">1</span>/5)</p>
             </div>
         </div>
     </div>
@@ -262,65 +235,65 @@
     <div class="fade-in">
         <div class="card">
             <div class="text-center mb-12">
-                <h2 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">Reasons You Make My World Brighter</h2>
-                <p class="text-white/60 text-sm md:text-base">A little list of all the things I adore about you</p>
+                <h2 class="font-serif text-3xl md:text-4xl text-ivory mb-3 font-medium">Reasons You Make My World Brighter</h2>
+                <p class="text-champagne/70 text-sm md:text-base">A little list of all the things I adore about you</p>
             </div>
             
             <div class="flex flex-col gap-5">
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">The way you light up every room you enter</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">Like a star , that always guide me</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">The way you light up every room you enter</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">Like a star , that always guide me</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😍</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😍</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Your laugh that I could listen to forever</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">btd7ky 7lw awy lama btb2y 3abeta, daymn btkon f wdny</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">Your laugh that I could listen to forever</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">btd7ky 7lw awy lama btb2y 3abeta, daymn btkon f wdny</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💘</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💘</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">you act as my entire world</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">daymn ad mas2olyt enk tkoony kol 7aga lya f el dunia</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">you act as my entire world</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">daymn ad mas2olyt enk tkoony kol 7aga lya f el dunia</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">🌹</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">🌹</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Your big support and even bigger heart</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">kol mara btb2y enty el sabb f kol 7aga 7lwa w kol nga7</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">Your big support and even bigger heart</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">kol mara btb2y enty el sabb f kol 7aga 7lwa w kol nga7</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">❤️</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">❤️</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">The way you make ordinary days feel special</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">kol youm m3aky mhma kan 3ady, byb2a youm momyz fa45</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">The way you make ordinary days feel special</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">kol youm m3aky mhma kan 3ady, byb2a youm momyz fa45</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😘</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😘</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">How safe and happy I feel by your side</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">daymn b7s bra7a w dafa w enty mwgooda</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">How safe and happy I feel by your side</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">daymn b7s bra7a w dafa w enty mwgooda</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Every adventure we've shared, and the ones to come</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">kol zekra bena , hya el zekra el tst72 afdl fakerha</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">Every adventure we've shared, and the ones to come</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">kol zekra bena , hya el zekra el tst72 afdl fakerha</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
-                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💋</span>
+                <div class="flex items-center gap-5 bg-ivory/5 border border-champagne/15 px-6 py-5 rounded-2xl shadow-sm hover:bg-ivory/10 transition duration-300">
+                    <span class="text-2xl bg-ivory/10 border border-champagne/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💋</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Simply being you, the best gift of all</p>
-                        <p class="text-white/70 font-handwriting text-xl mt-1">enty el bt5ly kol 7aga 7lwa , 7rfyn agml ne3ma lya!</p>
+                        <p class="font-bold text-ivory text-sm md:text-base tracking-wide">Simply being you, the best gift of all</p>
+                        <p class="text-champagne/80 font-handwriting text-xl mt-1">enty el bt5ly kol 7aga 7lwa , 7rfyn agml ne3ma lya!</p>
                     </div>
                 </div>
             </div>
@@ -330,8 +303,8 @@
     <!-- 5. Photo Carousel 2 -->
     <div class="fade-in">
         <div class="card text-center">
-            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
-                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">That will always</h3>
+            <div class="mb-10 inline-flex items-center justify-center border-b border-champagne/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-champagne tracking-[0.25em] uppercase">That will always</h3>
             </div>
             <div id="carousel2" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(2)">
                 <div class="polaroid active"><img src="6.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">No words</p></div>
@@ -339,7 +312,7 @@
                 <div class="polaroid"><img src="8.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">describe</p></div>
                 <div class="polaroid"><img src="9.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">how much</p></div>
                 <div class="polaroid"><img src="10.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">I love you</p></div>
-                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count2">1</span>/5)</p>
+                <p class="text-xs text-champagne/50 mt-8 font-medium tracking-widest transition group-hover:text-champagne/90">TAP TO CHANGE PHOTOS (<span id="count2">1</span>/5)</p>
             </div>
         </div>
     </div>
@@ -347,44 +320,46 @@
     <!-- 6. Prize Wheel -->
     <div class="fade-in">
         <div class="card text-center">
-            <h2 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">Spin for Your Birthday Surprise</h2>
-            <p class="text-white/60 text-sm uppercase tracking-widest mb-10">we will do it ,later just me and you</p>
+            <h2 class="font-serif text-3xl md:text-4xl text-ivory mb-2 font-medium">🎡 Your Birthday Plans</h2>
+            <p class="text-champagne/70 text-sm uppercase tracking-widest mb-10">Spin for Your Birthday Surprise</p>
             <div class="wheel-container">
                 <div class="wheel-pointer"></div>
-                <div id="wheel" class="wheel" style="background: conic-gradient(#800020 0deg 60deg, #5B0E1B 60deg 120deg, #800020 120deg 180deg, #5B0E1B 180deg 240deg, #800020 240deg 300deg, #5B0E1B 300deg 360deg);"></div>
+                <div id="wheel" class="wheel" style="background: conic-gradient(#5B0E1B 0deg 60deg, #3a0810 60deg 120deg, #5B0E1B 120deg 180deg, #3a0810 180deg 240deg, #5B0E1B 240deg 300deg, #3a0810 300deg 360deg);"></div>
             </div>
-            <button id="spinBtn" onclick="spinWheel()" class="bg-white hover:bg-gray-100 text-burgundy font-bold py-4 px-12 rounded-full shadow-lg transform transition hover:scale-105 mt-10 border border-white/20 tracking-wide">
+            <button id="spinBtn" onclick="spinWheel()" class="bg-ivory hover:bg-champagne text-burgundy font-bold py-4 px-12 rounded-full shadow-lg transform transition hover:scale-105 mt-10 border border-champagne/30 tracking-wide">
                 Spin the Wheel
             </button>
-            <p id="prizeResult" class="mt-8 font-serif text-2xl font-bold text-white h-8 transition-opacity opacity-0"></p>
+            <div id="prizeResultContainer" class="mt-8 transition-opacity opacity-0">
+                <h3 id="prizeTitle" class="font-serif text-2xl font-bold text-ivory mb-2"></h3>
+                <p id="prizeDesc" class="text-champagne/90 font-handwriting text-2xl"></p>
+            </div>
         </div>
     </div>
 
-    <!-- 7. Letter -->
+    <!-- 7. Letter (Physical Envelope & Slide-Out) -->
     <div class="fade-in">
         <div class="card text-center">
-            <div class="envelope-container inline-block" onclick="toggleLetter()">
-                
+            <div class="envelope-container" id="envelopeBox" onclick="openEnvelope()">
                 <div class="env-wrapper">
-                    <div class="env-pattern"></div>
-                    <div class="env-folds"></div>
-                    <div class="env-flap-wrapper">
-                        <div class="env-flap"></div>
-                    </div>
+                    <div class="env-flap"></div>
                     <div class="env-seal">R</div>
+                    <div class="paper-letter">
+                        <p class="font-bold text-burgundy">nwnw,</p>
+                        <p class="mt-2 text-gray-700">Happy birthday to the person who holds my whole heart. Today is all about you...</p>
+                        <p class="mt-2 text-right font-bold text-burgundy">- Hamoodk</p>
+                    </div>
                 </div>
-                
-                <p class="text-xs text-white/80 font-bold tracking-[0.2em] mt-8">TAP TO OPEN.</p>
+                <p class="text-xs text-champagne/80 font-bold tracking-[0.2em] mt-8">TAP TO OPEN LETTER.</p>
             </div>
             
-            <div id="letterContent" class="letter-content text-left font-handwriting mt-10">
-                <p>nwnw,</p>
+            <div id="fullLetter" class="full-letter-modal font-handwriting text-burgundy">
+                <p class="text-2xl font-bold">nwnw,</p>
                 <p class="text-right text-sm font-sans font-bold text-gray-400">15/9/2026</p>
-                <p class="mt-4">Happy birthday to the person who holds my whole heart. Today is all about you — the way you light up every room, your beautiful heart, and the joy you bring to my life every single day. I hope this year is as wonderful as you make the world for everyone around you.</p>
-                <p class="mt-4">This is our second birthday together, and definitely not the last one. I can’t wait for all the birthdays, memories, little moments, and adventures still waiting for us. I’ll always adore you, celebrate you, and choose you, today and every day after.</p>
-                <p class="mt-4">Thank you for being exactly who you are, and for being my everything. There are honestly no words that could ever describe how much I love you or how much you mean to me.</p>
-                <p class="mt-4">I love you, today, tomorrow, and always. Happy birthday, RAVE. ❤️ بحبك.</p>
-                <p class="mt-8 font-bold text-xl">Hamoodk</p>
+                <p class="mt-4 text-xl">Happy birthday to the person who holds my whole heart. Today is all about you — the way you light up every room, your beautiful heart, and the joy you bring to my life every single day. I hope this year is as wonderful as you make the world for everyone around you.</p>
+                <p class="mt-4 text-xl">This is our second birthday together, and definitely not the last one. I can’t wait for all the birthdays, memories, little moments, and adventures still waiting for us. I’ll always adore you, celebrate you, and choose you, today and every day after.</p>
+                <p class="mt-4 text-xl">Thank you for being exactly who you are, and for being my everything. There are honestly no words that could ever describe how much I love you or how much you mean to me.</p>
+                <p class="mt-4 text-xl">I love you, today, tomorrow, and always. Happy birthday, RAVE. ❤️ بحبك.</p>
+                <p class="mt-8 font-bold text-2xl">Hamoodk</p>
             </div>
         </div>
     </div>
@@ -392,8 +367,8 @@
     <!-- 8. Photo Carousel 3 -->
     <div class="fade-in">
         <div class="card text-center">
-            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
-                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">Live</h3>
+            <div class="mb-10 inline-flex items-center justify-center border-b border-champagne/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-champagne tracking-[0.25em] uppercase">Live</h3>
             </div>
             <div id="carousel3" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(3)">
                 <div class="polaroid active"><img src="11.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">YOU WILL</p></div>
@@ -401,38 +376,74 @@
                 <div class="polaroid"><img src="13.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">MEAN</p></div>
                 <div class="polaroid"><img src="14.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">EVERYTHING</p></div>
                 <div class="polaroid"><img src="15.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">FOR ME</p></div>
-                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count3">1</span>/5)</p>
+                <p class="text-xs text-champagne/50 mt-8 font-medium tracking-widest transition group-hover:text-champagne/90">TAP TO CHANGE PHOTOS (<span id="count3">1</span>/5)</p>
             </div>
         </div>
     </div>
 
-    <!-- 9. Favorite Songs -->
+    <!-- 9. Favorite Songs (Cassette Soundtrack Vibe) -->
     <div class="fade-in">
         <div class="card">
             <div class="text-center mb-12">
-                <p class="text-xs font-bold text-white/60 tracking-widest uppercase mb-2">Our Memories</p>
-                <h2 class="font-serif text-3xl md:text-4xl text-white mb-2 font-medium">Our Songs</h2>
-                <p class="text-white/80 text-sm font-handwriting text-2xl">just me and you</p>
+                <p class="text-xs font-bold text-champagne/70 tracking-widest uppercase mb-2">Our Soundtrack</p>
+                <h2 class="font-serif text-3xl md:text-4xl text-ivory mb-2 font-medium">Our Songs</h2>
+                <p class="text-champagne/90 text-sm font-handwriting text-2xl">just me and you</p>
             </div>
             <div class="space-y-4">
-                <a href="https://www.youtube.com/watch?v=H9MUAiBeb3w" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">01</span><div><h3 class="font-bold text-white text-lg">انا من غيرك</h3><p class="text-sm text-white/70 font-medium mt-1">love you</p><p class="text-sm italic text-white/50 mt-1">"just it is me without you"</p></div></div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=J9n07OdPiA8" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">02</span><div><h3 class="font-bold text-white text-lg">عيشالك</h3><p class="text-sm text-white/70 font-medium mt-1">to the moon</p><p class="text-sm italic text-white/50 mt-1">"our engagement song"</p></div></div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=Knl0840P6ic" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">03</span><div><h3 class="font-bold text-white text-lg">مولاتي</h3><p class="text-sm text-white/70 font-medium mt-1">and never</p><p class="text-sm italic text-white/50 mt-1">"reminds me of you"</p></div></div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=amy2fttDCb8" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">04</span><div><h3 class="font-bold text-white text-lg">وماله</h3><p class="text-sm text-white/70 font-medium mt-1">and never back</p><p class="text-sm italic text-white/50 mt-1">"our engagement song"</p></div></div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=_5GOjjcOSaM" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">05</span><div><h3 class="font-bold text-white text-lg">صدقني خلاص</h3><p class="text-sm text-white/70 font-medium mt-1">To the eternity</p><p class="text-sm italic text-white/50 mt-1">"first song to hear together"</p></div></div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=12SnjPcw25w" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">06</span><div><h3 class="font-bold text-white text-lg">DIVA</h3><p class="text-sm text-white/70 font-medium mt-1">and beyond</p><p class="text-sm italic text-white/50 mt-1">"first time (dumyat el jedidah) , reminds me of the early us"</p></div></div>
-                </a>
+                <div class="cassette-player" id="track-0">
+                    <div class="play-btn" onclick="toggleAudio(0)">▶</div>
+                    <div class="flex-grow text-left">
+                        <h3 class="font-bold text-ivory text-base">انا من غيرك</h3>
+                        <p class="text-xs text-champagne/70">love you</p>
+                        <p class="text-xs italic text-champagne/90 mt-1">“just it is me without you”</p>
+                    </div>
+                    <div class="waveform"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+                <div class="cassette-player" id="track-1">
+                    <div class="play-btn" onclick="toggleAudio(1)">▶</div>
+                    <div class="flex-grow text-left">
+                        <h3 class="font-bold text-ivory text-base">عيشالك</h3>
+                        <p class="text-xs text-champagne/70">to the moon</p>
+                        <p class="text-xs italic text-champagne/90 mt-1">“our engagement song”</p>
+                    </div>
+                    <div class="waveform"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+                <div class="cassette-player" id="track-2">
+                    <div class="play-btn" onclick="toggleAudio(2)">▶</div>
+                    <div class="flex-grow text-left">
+                        <h3 class="font-bold text-ivory text-base">مولاتي</h3>
+                        <p class="text-xs text-champagne/70">and never</p>
+                        <p class="text-xs italic text-champagne/90 mt-1">“reminds me of you”</p>
+                    </div>
+                    <div class="waveform"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+                <div class="cassette-player" id="track-3">
+                    <div class="play-btn" onclick="toggleAudio(3)">▶</div>
+                    <div class="flex-grow text-left">
+                        <h3 class="font-bold text-ivory text-base">وماله</h3>
+                        <p class="text-xs text-champagne/70">and never back</p>
+                        <p class="text-xs italic text-champagne/90 mt-1">“our engagement song”</p>
+                    </div>
+                    <div class="waveform"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+                <div class="cassette-player" id="track-4">
+                    <div class="play-btn" onclick="toggleAudio(4)">▶</div>
+                    <div class="flex-grow text-left">
+                        <h3 class="font-bold text-ivory text-base">صدقني خلاص</h3>
+                        <p class="text-xs text-champagne/70">To the eternity</p>
+                        <p class="text-xs italic text-champagne/90 mt-1">“first song to hear together”</p>
+                    </div>
+                    <div class="waveform"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+                <div class="cassette-player" id="track-5">
+                    <div class="play-btn" onclick="toggleAudio(5)">▶</div>
+                    <div class="flex-grow text-left">
+                        <h3 class="font-bold text-ivory text-base">DIVA</h3>
+                        <p class="text-xs text-champagne/70">and beyond</p>
+                        <p class="text-xs italic text-champagne/90 mt-1">“first time (dumyat el jedidah) , reminds me of the early us”</p>
+                    </div>
+                    <div class="waveform"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
             </div>
         </div>
     </div>
@@ -440,17 +451,17 @@
     <!-- 10. Time Together -->
     <div class="fade-in">
         <div class="card text-center">
-            <p class="text-xs text-white/70 uppercase tracking-widest font-bold mb-4">💞 SINCE JANUARY 21, 2025</p>
-            <h2 class="font-serif text-4xl mb-4 font-medium text-white">Every Moment With You</h2>
-            <p class="text-white/80 text-sm mb-10">We've been making memories together for</p>
+            <p class="text-xs text-champagne/70 uppercase tracking-widest font-bold mb-4">💞 SINCE JANUARY 21, 2025</p>
+            <h2 class="font-serif text-4xl mb-4 font-medium text-ivory">Every Moment With You</h2>
+            <p class="text-champagne/80 text-sm mb-10">We've been making memories together for</p>
             
             <div class="grid grid-cols-3 md:grid-cols-6 gap-3 mb-2">
-                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-years" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Years</p></div>
-                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-months" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Months</p></div>
-                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-days" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Days</p></div>
-                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-hours" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Hours</p></div>
-                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-mins" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Minutes</p></div>
-                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-secs" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Seconds</p></div>
+                <div class="bg-ivory/5 rounded-2xl p-4 border border-champagne/15 shadow-inner"><p id="t-years" class="text-3xl font-bold text-ivory">0</p><p class="text-[10px] text-champagne/60 uppercase mt-2 tracking-wider font-bold">Years</p></div>
+                <div class="bg-ivory/5 rounded-2xl p-4 border border-champagne/15 shadow-inner"><p id="t-months" class="text-3xl font-bold text-ivory">0</p><p class="text-[10px] text-champagne/60 uppercase mt-2 tracking-wider font-bold">Months</p></div>
+                <div class="bg-ivory/5 rounded-2xl p-4 border border-champagne/15 shadow-inner"><p id="t-days" class="text-3xl font-bold text-ivory">0</p><p class="text-[10px] text-champagne/60 uppercase mt-2 tracking-wider font-bold">Days</p></div>
+                <div class="bg-ivory/5 rounded-2xl p-4 border border-champagne/15 shadow-inner"><p id="t-hours" class="text-3xl font-bold text-ivory">0</p><p class="text-[10px] text-champagne/60 uppercase mt-2 tracking-wider font-bold">Hours</p></div>
+                <div class="bg-ivory/5 rounded-2xl p-4 border border-champagne/15 shadow-inner"><p id="t-mins" class="text-3xl font-bold text-ivory">0</p><p class="text-[10px] text-champagne/60 uppercase mt-2 tracking-wider font-bold">Minutes</p></div>
+                <div class="bg-ivory/5 rounded-2xl p-4 border border-champagne/15 shadow-inner"><p id="t-secs" class="text-3xl font-bold text-ivory">0</p><p class="text-[10px] text-champagne/60 uppercase mt-2 tracking-wider font-bold">Seconds</p></div>
             </div>
         </div>
     </div>
@@ -458,8 +469,8 @@
     <!-- 11. Photo Carousel 4 -->
     <div class="fade-in">
         <div class="card text-center">
-            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
-                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">Forever</h3>
+            <div class="mb-10 inline-flex items-center justify-center border-b border-champagne/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-champagne tracking-[0.25em] uppercase">Forever</h3>
             </div>
             <div id="carousel4" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(4)">
                 <div class="polaroid active"><img src="16.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">EVERY</p></div>
@@ -467,7 +478,7 @@
                 <div class="polaroid"><img src="18.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">WE WENT</p></div>
                 <div class="polaroid"><img src="19.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">TOGETHER</p></div>
                 <div class="polaroid"><img src="20.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">IS A WORLD TO ME</p></div>
-                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count4">1</span>/5)</p>
+                <p class="text-xs text-champagne/50 mt-8 font-medium tracking-widest transition group-hover:text-champagne/90">TAP TO CHANGE PHOTOS (<span id="count4">1</span>/5)</p>
             </div>
         </div>
     </div>
@@ -475,19 +486,19 @@
     <!-- 12. Moon Phase -->
     <div class="fade-in pb-12">
         <div class="card text-center">
-            <h2 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">The moon that night</h2>
-            <p class="text-white/80 text-sm mb-8">this is what the moon looked at your birth , it was shy from the real moon</p>
-            <p class="text-xs text-white/60 font-bold tracking-[0.15em] uppercase mb-12">September 15, 2004 • Mansoura, Egypt</p>
+            <h2 class="font-serif text-3xl md:text-4xl text-ivory mb-3 font-medium">The moon that night</h2>
+            <p class="text-champagne/80 text-sm mb-8">this is what the moon looked at your birth , it was shy from the real moon</p>
+            <p class="text-xs text-champagne/60 font-bold tracking-[0.15em] uppercase mb-12">September 15, 2004 • Mansoura, Egypt</p>
             
             <div class="moon"></div>
             
             <div class="flex justify-center gap-4 mt-12">
-                <div class="bg-white/5 border border-white/10 rounded-xl px-8 py-4 shadow-sm">
-                    <p class="font-bold text-white text-lg">Waxing Crescent</p>
+                <div class="bg-ivory/5 border border-champagne/15 rounded-xl px-8 py-4 shadow-sm">
+                    <p class="font-bold text-ivory text-lg">Waxing Crescent</p>
                 </div>
-                <div class="bg-white/5 border border-white/10 rounded-xl px-8 py-4 shadow-sm">
-                    <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">Illumination</p>
-                    <p class="font-bold text-white text-lg">1%</p>
+                <div class="bg-ivory/5 border border-champagne/15 rounded-xl px-8 py-4 shadow-sm">
+                    <p class="text-[10px] text-champagne/50 uppercase tracking-widest font-bold mb-1">Illumination</p>
+                    <p class="font-bold text-ivory text-lg">1%</p>
                 </div>
             </div>
         </div>
@@ -503,8 +514,7 @@
             p.style.width = `${size}px`;
             p.style.height = `${size}px`;
             p.style.left = `${Math.random() * 100}vw`;
-            p.style.animation = `floatUp ${Math.random() * 10 + 10}s linear infinite`;
-            p.style.animationDelay = `${Math.random() * 15}s`;
+            p.style.animationDelay = `${Math.random() * 12}s`;
             particleContainer.appendChild(p);
         }
 
@@ -523,8 +533,8 @@
             var duration = 3 * 1000;
             var end = Date.now() + duration;
             (function frame() {
-                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#800020', '#5B0E1B', '#ffffff', '#f0f0f0'] });
-                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#800020', '#5B0E1B', '#ffffff', '#f0f0f0'] });
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#5B0E1B', '#E5D4B3', '#FAF6EE'] });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#5B0E1B', '#E5D4B3', '#FAF6EE'] });
                 if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
@@ -540,19 +550,28 @@
             document.getElementById('count' + id).innerText = carousels[id] + 1;
         }
 
-        // Wheel
+        // Wheel with Tiny Personalized Reveals
         let currentRotation = 0;
-        const prizes = ["Dinner Date", "Dessert Date", "Cinema movie", "CAIRO ADVENTURE", "make up", "A Little Gift"];
+        const prizeDetails = [
+            { title: "✨ DINNER DATE", desc: "Candlelight, good food, and just us." },
+            { title: "🍰 DESSERT DATE", desc: "You pick the dessert. I'm paying. Obviously." },
+            { title: "🎬 CINEMA MOVIE", desc: "Popcorn in hand and you stealing my jacket." },
+            { title: "🌆 CAIRO ADVENTURE", desc: "You don't get to know the details yet." },
+            { title: "💄 MAKE UP", desc: "A little treat to make you smile." },
+            { title: "🎁 A LITTLE GIFT", desc: "Because you deserve the whole world." }
+        ];
         function spinWheel() {
             let wheel = document.getElementById('wheel');
             let btn = document.getElementById('spinBtn');
-            let resultText = document.getElementById('prizeResult');
+            let resContainer = document.getElementById('prizeResultContainer');
+            let titleEl = document.getElementById('prizeTitle');
+            let descEl = document.getElementById('prizeDesc');
             
             btn.innerText = "Spinning...";
             btn.disabled = true;
-            resultText.style.opacity = "0";
+            resContainer.style.opacity = "0";
 
-            let randomSpin = Math.floor(Math.random() * 360) + 1440; // min 4 spins
+            let randomSpin = Math.floor(Math.random() * 360) + 1440;
             currentRotation += randomSpin;
             wheel.style.transform = `rotate(${currentRotation}deg)`;
 
@@ -563,20 +582,47 @@
                 let actualDegrees = currentRotation % 360;
                 let slice = Math.floor((360 - actualDegrees + 30) % 360 / 60);
                 
-                resultText.innerText = prizes[slice];
-                resultText.style.opacity = "1";
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ffffff', '#e0e0e0'] });
+                titleEl.innerText = prizeDetails[slice].title;
+                descEl.innerText = prizeDetails[slice].desc;
+                resContainer.style.opacity = "1";
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#E5D4B3', '#FAF6EE'] });
             }, 4000);
         }
 
-        // Letter
-        function toggleLetter() {
-            let letter = document.getElementById('letterContent');
-            letter.classList.toggle('open');
-            if(letter.classList.contains('open')){
+        // Envelope Open & Expand Letter
+        let envelopeOpened = false;
+        function openEnvelope() {
+            let box = document.getElementById('envelopeBox');
+            let fullLetter = document.getElementById('fullLetter');
+            
+            if (!envelopeOpened) {
+                box.classList.add('open');
+                envelopeOpened = true;
                 setTimeout(() => {
-                    letter.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
+                    fullLetter.classList.add('open');
+                    fullLetter.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 700);
+            }
+        }
+
+        // Cassette Player Audio Simulation
+        function toggleAudio(index) {
+            let track = document.getElementById('track-' + index);
+            let btn = track.querySelector('.play-btn');
+            
+            // Reset others
+            document.querySelectorAll('.cassette-player').forEach((el, idx) => {
+                if(idx !== index) {
+                    el.classList.remove('playing');
+                    el.querySelector('.play-btn').innerText = '▶';
+                }
+            });
+
+            track.classList.toggle('playing');
+            if(track.classList.contains('playing')) {
+                btn.innerText = '❚❚';
+            } else {
+                btn.innerText = '▶';
             }
         }
 
