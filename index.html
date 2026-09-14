@@ -106,43 +106,45 @@
         .wheel { width: 100%; height: 100%; border-radius: 50%; transition: transform 4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #FAF6EE; z-index: 10; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
 
-        /* Custom Envelope & Slide-Out Paper */
+        /* Custom Envelope & Satisfying Slide-Out Animation */
         .envelope-container { cursor: pointer; display: inline-block; perspective: 1000px; margin-top: 1rem; }
         .env-wrapper {
-            position: relative; width: 300px; height: 190px; margin: 0 auto;
-            background: #3a0810; border-radius: 6px;
+            position: relative; width: 320px; height: 200px; margin: 0 auto;
+            background: #3a0810; border-radius: 8px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(229,212,179,0.3);
             overflow: visible; transition: transform 0.4s ease;
         }
         .env-wrapper:hover { transform: scale(1.03); }
+        
         .env-flap {
             position: absolute; top: 0; left: 0; right: 0; height: 60%;
             background: #5B0E1B; clip-path: polygon(0 0, 100% 0, 50% 100%);
-            transform-origin: top; transition: transform 0.6s ease; z-index: 20;
+            transform-origin: top; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 20;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .envelope-container.open .env-flap { transform: rotateX(180deg); z-index: 1; }
+
         .env-seal {
             position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
-            width: 52px; height: 52px; background: linear-gradient(135deg, #F4D068 0%, #AA771C 100%);
+            width: 56px; height: 56px; background: linear-gradient(135deg, #F4D068 0%, #AA771C 100%);
             border-radius: 50%; z-index: 25; display: flex; align-items: center; justify-content: center;
             font-family: 'Playfair Display', serif; font-weight: bold; font-size: 24px; color: #3a0810;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.4);
-            transition: opacity 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .envelope-container.open .env-seal { opacity: 0; pointer-events: none; }
+        .envelope-container.open .env-seal { transform: translate(-50%, -50%) scale(0) rotate(45deg); opacity: 0; pointer-events: none; }
 
-        /* Sliding Paper Letter */
+        /* Tactile Sliding Paper Letter */
         .paper-letter {
-            position: absolute; left: 15px; right: 15px; bottom: 10px; height: 160px;
-            background: #FAF6EE; color: #3a0810; border-radius: 4px; padding: 20px;
-            z-index: 10; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.3); font-family: 'Caveat', cursive; font-size: 1.3rem; line-height: 1.4;
+            position: absolute; left: 20px; right: 20px; bottom: 10px; height: 170px;
+            background: #FAF6EE; color: #3a0810; border-radius: 6px; padding: 22px;
+            z-index: 10; transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.4); font-family: 'Caveat', cursive; font-size: 1.35rem; line-height: 1.4;
             overflow: hidden; text-align: left;
         }
-        .envelope-container.open .paper-letter { transform: translateY(-130px); height: 380px; z-index: 30; }
+        .envelope-container.open .paper-letter { transform: translateY(-160px); z-index: 30; }
 
-        /* Full Expanded Letter View */
+        /* Full Expanded Letter Modal */
         .full-letter-modal { display: none; margin-top: 2rem; background: #FAF6EE; color: #3a0810; border-radius: 12px; padding: 3rem 2.5rem; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: left; position: relative; }
         .full-letter-modal::before {
             content: ""; position: absolute; inset: 0; border-radius: 12px;
@@ -150,7 +152,7 @@
             pointer-events: none;
         }
         .full-letter-modal.open { display: block; animation: unfold 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes unfold { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes unfold { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
         /* Cassette / Waveform Audio Player */
         .cassette-player { background: linear-gradient(135deg, #1a050b 0%, #070B14 100%); border: 1px solid rgba(229,212,179,0.2); border-radius: 16px; padding: 1.2rem; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease; }
@@ -338,7 +340,7 @@
         </div>
     </div>
 
-    <!-- 7. Letter (Physical Envelope & Slide-Out) -->
+    <!-- 7. Letter (Satisfying Physical Envelope & Slide-Out) -->
     <div class="fade-in">
         <div class="card text-center">
             <div class="envelope-container" id="envelopeBox" onclick="openEnvelope()">
@@ -639,7 +641,7 @@
                 setTimeout(() => {
                     fullLetter.classList.add('open');
                     fullLetter.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 700);
+                }, 800);
             }
         }
 
