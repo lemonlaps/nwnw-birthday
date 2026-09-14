@@ -19,8 +19,7 @@
                     colors: {
                         burgundy: '#800020',
                         darkred: '#5B0E1B',
-                        cream: '#FCF9F6',
-                        gold: '#D4AF37'
+                        cream: '#FCF9F6'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -38,7 +37,7 @@
     <style>
         body { 
             /* Deep dark red gradient */
-            background: linear-gradient(135deg, #110303 0%, #2a050b 50%, #110303 100%); 
+            background: linear-gradient(135deg, #0a0101 0%, #220308 50%, #0a0101 100%); 
             color: #FCF9F6; 
             overflow-x: hidden; 
             position: relative;
@@ -55,23 +54,23 @@
         }
 
         /* Animated Motion Graphics */
-        .bg-graphic { position: fixed; filter: blur(90px); z-index: -2; pointer-events: none; border-radius: 50%; }
+        .bg-graphic { position: fixed; filter: blur(100px); z-index: -2; pointer-events: none; border-radius: 50%; }
         
         .bg-graphic-1 {
             top: -10%; left: -10%; width: 50vw; height: 50vw;
-            background: rgba(128, 0, 32, 0.4);
+            background: rgba(128, 0, 32, 0.5);
             animation: drift1 20s infinite alternate ease-in-out;
         }
         .bg-graphic-2 {
             bottom: -10%; right: -10%; width: 60vw; height: 60vw;
-            background: rgba(212, 175, 55, 0.12);
+            background: rgba(255, 255, 255, 0.05);
             animation: drift2 25s infinite alternate ease-in-out;
         }
         
         /* Floating Particles (Embers) */
         .particle {
             position: fixed;
-            background: radial-gradient(circle, rgba(212,175,55,0.8) 0%, rgba(212,175,55,0) 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
             border-radius: 50%;
             pointer-events: none;
             z-index: -1;
@@ -83,21 +82,21 @@
         
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.5; }
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* Premium Dark Red Glassmorphism Cards */
+        /* Premium Dark Glassmorphism Cards */
         .card { 
-            background: rgba(91, 14, 27, 0.45); 
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(212, 175, 55, 0.25); 
+            background: rgba(20, 3, 5, 0.5); 
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.12); 
             border-radius: 24px; 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05); 
-            padding: 2.5rem 2rem; 
-            margin-bottom: 2.5rem; 
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05); 
+            padding: 3rem 2rem; 
+            margin-bottom: 3rem; 
             position: relative; 
             z-index: 10; 
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
@@ -105,44 +104,43 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         /* Smooth Scroll Reveal */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         
         /* Polaroid Style */
-        .polaroid { background: white; padding: 12px 12px 30px 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4); transform: rotate(-2deg); transition: transform 0.3s ease; display: none; border: 1px solid #eaeaea; }
+        .polaroid { background: white; padding: 12px 12px 32px 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(-2deg); transition: transform 0.3s ease; display: none; border: 1px solid #eaeaea; border-radius: 4px; }
         .polaroid.active { display: block; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .polaroid img { width: 100%; height: 320px; object-fit: cover; background-color: #f8f8f8; }
+        .polaroid img { width: 100%; height: 320px; object-fit: cover; background-color: #f8f8f8; border-radius: 2px; }
         @keyframes popIn { from { opacity: 0; transform: scale(0.9) rotate(-5deg); } to { opacity: 1; transform: scale(1) rotate(-2deg); } }
         
         /* Wheel */
-        .wheel-container { position: relative; width: 280px; height: 280px; margin: 2rem auto; border-radius: 50%; border: 6px solid #D4AF37; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
+        .wheel-container { position: relative; width: 280px; height: 280px; margin: 2rem auto; border-radius: 50%; border: 6px solid #ffffff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden; }
         .wheel { width: 100%; height: 100%; border-radius: 50%; transition: transform 4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #D4AF37; z-index: 10; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.4)); }
+        .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #ffffff; z-index: 10; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
         
         /* Envelope */
         .envelope-container { cursor: pointer; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); perspective: 1000px; }
         .envelope-container:hover { transform: scale(1.05); }
-        .letter-content { display: none; margin-top: 2rem; border-top: 1px dashed #ccc; padding-top: 1.5rem; background: repeating-linear-gradient(transparent, transparent 31px, #f4e8e8 31px, #f4e8e8 32px); line-height: 32px; font-size: 1.5rem; border-radius: 8px; padding: 2rem; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
+        .letter-content { display: none; margin-top: 2rem; border-top: 1px dashed #ccc; padding-top: 1.5rem; background: repeating-linear-gradient(transparent, transparent 31px, #f4e8e8 31px, #f4e8e8 32px); line-height: 32px; font-size: 1.5rem; border-radius: 8px; padding: 2.5rem 2rem; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
         .letter-content.open { display: block; animation: unfold 0.8s ease; }
         @keyframes unfold { from { opacity: 0; transform: rotateX(-90deg); } to { opacity: 1; transform: rotateX(0deg); } }
         
-        /* Real Moon Phase (July 27, 2026 - Waxing Gibbous 96%) */
+        /* Real Moon Phase */
         .moon { 
-            width: 140px; height: 140px; border-radius: 50%; 
+            width: 150px; height: 150px; border-radius: 50%; 
             background-image: url('https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&w=400&q=80');
             background-size: 110%;
             background-position: center;
-            /* Subtly darken the left edge to simulate 96% illumination */
-            box-shadow: inset 14px 0 18px rgba(0,0,0,0.85), 0 0 40px rgba(212,175,55,0.2); 
-            margin: 2rem auto; position: relative;
+            box-shadow: inset 14px 0 18px rgba(0,0,0,0.9), 0 0 50px rgba(255,255,255,0.15); 
+            margin: 2.5rem auto; position: relative;
         }
     </style>
 </head>
-<body class="antialiased py-10 px-4 max-w-2xl mx-auto">
+<body class="antialiased py-12 px-4 max-w-2xl mx-auto">
 
     <!-- Background Motion Graphics -->
     <div class="bg-graphic bg-graphic-1"></div>
@@ -151,34 +149,36 @@
 
     <!-- 1. Header -->
     <div class="fade-in pt-4">
-        <div class="card text-center pt-14 pb-14">
-            <h1 class="font-serif text-4xl md:text-5xl text-gold mb-4 font-semibold tracking-tight">Happy Birthday, My Everything</h1>
-            <p class="text-cream font-sans md:text-lg font-medium opacity-90">Today we celebrate the most amazing person in my world 🎂</p>
+        <div class="card text-center pt-16 pb-16">
+            <h1 class="font-serif text-4xl md:text-5xl text-white mb-5 font-semibold tracking-tight leading-tight">Happy Birthday, My Everything</h1>
+            <p class="text-white/80 font-sans md:text-lg font-medium">Today we celebrate the most amazing person in my world 🎂</p>
         </div>
     </div>
 
     <!-- 2. Confetti Explosion -->
     <div class="fade-in">
         <div class="card text-center">
-            <h2 class="font-serif text-2xl text-gold mb-2 font-medium">Any thing you wish will become true</h2>
-            <p class="text-xs text-cream opacity-70 mb-8 uppercase tracking-widest font-bold">I LOVE YOU , NWNW</p>
-            <button onclick="fireConfetti()" class="bg-gold hover:bg-white text-darkred font-bold py-4 px-10 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] transform transition hover:scale-105 border border-white/20">
+            <h2 class="font-serif text-2xl text-white mb-3 font-medium">Any thing you wish will become true</h2>
+            <p class="text-xs text-white/60 mb-10 uppercase tracking-[0.2em] font-bold">I LOVE YOU , NWNW</p>
+            <button onclick="fireConfetti()" class="bg-white hover:bg-gray-100 text-burgundy font-bold py-4 px-12 rounded-full shadow-[0_0_30px_rgba(255,255,255,0.3)] transform transition hover:scale-105 border border-white/20 tracking-wide">
                 🎂 MAKE A WISH 🎂
             </button>
         </div>
     </div>
 
-    <!-- 3. Photo Carousel 1 (Photos 1-5) -->
+    <!-- 3. Photo Carousel 1 -->
     <div class="fade-in">
         <div class="card text-center">
-            <p class="text-xs font-bold text-gold opacity-80 tracking-widest uppercase mb-6">memories...</p>
-            <div id="carousel1" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(1)">
+            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">Memories...</h3>
+            </div>
+            <div id="carousel1" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(1)">
                 <div class="polaroid active"><img src="1.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">YOU WILL</p></div>
                 <div class="polaroid"><img src="2.jpeg" alt="2"><p class="font-handwriting text-3xl mt-4 text-burgundy">ALWAYS</p></div>
                 <div class="polaroid"><img src="3.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">BE MY</p></div>
                 <div class="polaroid"><img src="4.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">BEST</p></div>
                 <div class="polaroid"><img src="5.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">MEMORY</p></div>
-                <p class="text-xs text-cream opacity-70 mt-6 font-medium">TAP TO CHANGE PHOTOS (<span id="count1">1</span>/5)</p>
+                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count1">1</span>/5)</p>
             </div>
         </div>
     </div>
@@ -186,83 +186,85 @@
     <!-- 4. Things I Love (Pills Layout) -->
     <div class="fade-in">
         <div class="card">
-            <div class="text-center mb-10">
-                <h2 class="font-serif text-3xl text-gold mb-2 font-medium">Reasons You Make My World Brighter</h2>
-                <p class="text-cream opacity-80 text-sm">A little list of all the things I adore about you</p>
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">Reasons You Make My World Brighter</h2>
+                <p class="text-white/60 text-sm md:text-base">A little list of all the things I adore about you</p>
             </div>
             
-            <div class="flex flex-col gap-4">
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-full shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
+            <div class="flex flex-col gap-5">
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">The way you light up every room you enter</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">Like a star , that always guide me</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">The way you light up every room you enter</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">Like a star , that always guide me</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-full shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😍</span>
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😍</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">Your laugh that I could listen to forever</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">btd7ky 7lw awy lama btb2y 3abeta, daymn btkon f wdny</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Your laugh that I could listen to forever</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">btd7ky 7lw awy lama btb2y 3abeta, daymn btkon f wdny</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-full shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💘</span>
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💘</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">you act as my entire world</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">daymn ad mas2olyt enk tkoony kol 7aga lya f el dunia</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">you act as my entire world</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">daymn ad mas2olyt enk tkoony kol 7aga lya f el dunia</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-[2rem] shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">🌹</span>
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">🌹</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">Your big support and even bigger heart</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">kol mara btb2y enty el sabb f kol 7aga 7lwa w kol nga7</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Your big support and even bigger heart</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">kol mara btb2y enty el sabb f kol 7aga 7lwa w kol nga7</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-[2rem] shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">❤️</span>
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">❤️</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">The way you make ordinary days feel special</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">kol youm m3aky mhma kan 3ady, byb2a youm momyz fa45</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">The way you make ordinary days feel special</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">kol youm m3aky mhma kan 3ady, byb2a youm momyz fa45</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-full shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😘</span>
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">😘</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">How safe and happy I feel by your side</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">daymn b7s bra7a w dafa w enty mwgooda</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">How safe and happy I feel by your side</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">daymn b7s bra7a w dafa w enty mwgooda</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-[2rem] shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">Every adventure we've shared, and the ones to come</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">kol zekra bena , hya el zekra el tst72 afdl fakerha</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Every adventure we've shared, and the ones to come</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">kol zekra bena , hya el zekra el tst72 afdl fakerha</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-black/40 border border-gold/20 px-6 py-4 rounded-[2rem] shadow-sm hover:shadow-md transition duration-300">
-                    <span class="text-2xl bg-black/50 border border-gold/30 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💋</span>
+                <div class="flex items-center gap-5 bg-white/5 border border-white/10 px-6 py-5 rounded-2xl shadow-sm hover:bg-white/10 transition duration-300">
+                    <span class="text-2xl bg-white/10 border border-white/20 w-12 h-12 flex items-center justify-center rounded-full flex-shrink-0">💋</span>
                     <div class="text-left leading-tight">
-                        <p class="font-bold text-white text-sm md:text-base">Simply being you, the best gift of all</p>
-                        <p class="text-gray-300 font-handwriting text-lg md:text-xl mt-1">enty el bt5ly kol 7aga 7lwa , 7rfyn agml ne3ma lya!</p>
+                        <p class="font-bold text-white text-sm md:text-base tracking-wide">Simply being you, the best gift of all</p>
+                        <p class="text-white/70 font-handwriting text-xl mt-1">enty el bt5ly kol 7aga 7lwa , 7rfyn agml ne3ma lya!</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 5. Photo Carousel 2 (Photos 6-10) -->
+    <!-- 5. Photo Carousel 2 -->
     <div class="fade-in">
         <div class="card text-center">
-            <p class="text-xs font-bold text-gold opacity-80 tracking-widest uppercase mb-6">That will always</p>
-            <div id="carousel2" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(2)">
+            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">That will always</h3>
+            </div>
+            <div id="carousel2" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(2)">
                 <div class="polaroid active"><img src="6.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">No words</p></div>
                 <div class="polaroid"><img src="7.jpeg" alt="2"><p class="font-handwriting text-3xl mt-4 text-burgundy">that can</p></div>
                 <div class="polaroid"><img src="8.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">describe</p></div>
                 <div class="polaroid"><img src="9.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">how much</p></div>
                 <div class="polaroid"><img src="10.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">I love you</p></div>
-                <p class="text-xs text-cream opacity-70 mt-6 font-medium">TAP TO CHANGE PHOTOS (<span id="count2">1</span>/5)</p>
+                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count2">1</span>/5)</p>
             </div>
         </div>
     </div>
@@ -270,16 +272,16 @@
     <!-- 6. Prize Wheel -->
     <div class="fade-in">
         <div class="card text-center">
-            <h2 class="font-serif text-3xl text-gold mb-2 font-medium">Spin for Your Birthday Surprise</h2>
-            <p class="text-cream opacity-80 text-sm uppercase tracking-widest mb-6">we will do it ,later just me and you</p>
+            <h2 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">Spin for Your Birthday Surprise</h2>
+            <p class="text-white/60 text-sm uppercase tracking-widest mb-10">we will do it ,later just me and you</p>
             <div class="wheel-container">
                 <div class="wheel-pointer"></div>
                 <div id="wheel" class="wheel" style="background: conic-gradient(#800020 0deg 60deg, #5B0E1B 60deg 120deg, #800020 120deg 180deg, #5B0E1B 180deg 240deg, #800020 240deg 300deg, #5B0E1B 300deg 360deg);"></div>
             </div>
-            <button id="spinBtn" onclick="spinWheel()" class="bg-gold hover:bg-white text-darkred font-bold py-4 px-10 rounded-full shadow-md transform transition hover:scale-105 mt-6 border border-white/20">
+            <button id="spinBtn" onclick="spinWheel()" class="bg-white hover:bg-gray-100 text-burgundy font-bold py-4 px-12 rounded-full shadow-lg transform transition hover:scale-105 mt-10 border border-white/20 tracking-wide">
                 Spin the Wheel
             </button>
-            <p id="prizeResult" class="mt-6 font-serif text-2xl font-bold text-gold h-8 transition-opacity opacity-0"></p>
+            <p id="prizeResult" class="mt-8 font-serif text-2xl font-bold text-white h-8 transition-opacity opacity-0"></p>
         </div>
     </div>
 
@@ -287,11 +289,11 @@
     <div class="fade-in">
         <div class="card text-center">
             <div class="envelope-container inline-block" onclick="toggleLetter()">
-                <div class="w-36 h-28 bg-darkred rounded relative mx-auto shadow-2xl flex items-center justify-center border border-gold/40">
-                    <div class="absolute w-full h-full border-4 border-[#3a0810] rounded opacity-60"></div>
-                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-serif text-darkred font-bold text-2xl shadow-inner border-2 border-white/30">R</div>
+                <div class="w-40 h-28 bg-black/40 rounded relative mx-auto shadow-2xl flex items-center justify-center border border-white/20 backdrop-blur-md">
+                    <div class="absolute w-full h-full border-4 border-white/5 rounded opacity-60"></div>
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center font-serif text-burgundy font-bold text-2xl shadow-inner border border-white/50">R</div>
                 </div>
-                <p class="text-xs text-gold opacity-80 font-bold tracking-widest mt-6">TAP TO OPEN.</p>
+                <p class="text-xs text-white/80 font-bold tracking-[0.2em] mt-8">TAP TO OPEN.</p>
             </div>
             
             <div id="letterContent" class="letter-content text-left font-handwriting text-burgundy mt-10">
@@ -306,17 +308,19 @@
         </div>
     </div>
 
-    <!-- 8. Photo Carousel 3 (Photos 11-15) -->
+    <!-- 8. Photo Carousel 3 -->
     <div class="fade-in">
         <div class="card text-center">
-            <p class="text-xs font-bold text-gold opacity-80 tracking-widest uppercase mb-6">LIVE</p>
-            <div id="carousel3" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(3)">
+            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">Live</h3>
+            </div>
+            <div id="carousel3" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(3)">
                 <div class="polaroid active"><img src="11.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">YOU WILL</p></div>
                 <div class="polaroid"><img src="12.jpeg" alt="2"><p class="font-handwriting text-3xl mt-4 text-burgundy">ALWAYS</p></div>
                 <div class="polaroid"><img src="13.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">MEAN</p></div>
                 <div class="polaroid"><img src="14.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">EVERYTHING</p></div>
                 <div class="polaroid"><img src="15.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">FOR ME</p></div>
-                <p class="text-xs text-cream opacity-70 mt-6 font-medium">TAP TO CHANGE PHOTOS (<span id="count3">1</span>/5)</p>
+                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count3">1</span>/5)</p>
             </div>
         </div>
     </div>
@@ -324,29 +328,29 @@
     <!-- 9. Favorite Songs -->
     <div class="fade-in">
         <div class="card">
-            <div class="text-center mb-8">
-                <p class="text-xs font-bold text-gold opacity-80 tracking-widest uppercase">our memories</p>
-                <h2 class="font-serif text-3xl text-gold mb-2 font-medium">our songs</h2>
-                <p class="text-cream opacity-80 text-sm font-handwriting text-2xl">just me and you</p>
+            <div class="text-center mb-12">
+                <p class="text-xs font-bold text-white/60 tracking-widest uppercase mb-2">Our Memories</p>
+                <h2 class="font-serif text-3xl md:text-4xl text-white mb-2 font-medium">Our Songs</h2>
+                <p class="text-white/80 text-sm font-handwriting text-2xl">just me and you</p>
             </div>
             <div class="space-y-4">
-                <a href="https://www.youtube.com/watch?v=H9MUAiBeb3w" target="_blank" class="block p-5 bg-black/40 border border-gold/20 rounded-xl hover:bg-black/60 transition group shadow-sm hover:shadow-md">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-gold/40 mr-6 group-hover:text-gold/80 transition">01</span><div><h3 class="font-bold text-white group-hover:text-gold text-lg">انا من غيرك</h3><p class="text-sm text-gray-300 font-medium">love you</p><p class="text-sm italic text-gray-400 mt-1">"just it is me without you"</p></div></div>
+                <a href="https://www.youtube.com/watch?v=H9MUAiBeb3w" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">01</span><div><h3 class="font-bold text-white text-lg">انا من غيرك</h3><p class="text-sm text-white/70 font-medium mt-1">love you</p><p class="text-sm italic text-white/50 mt-1">"just it is me without you"</p></div></div>
                 </a>
-                <a href="https://www.youtube.com/watch?v=J9n07OdPiA8" target="_blank" class="block p-5 bg-black/40 border border-gold/20 rounded-xl hover:bg-black/60 transition group shadow-sm hover:shadow-md">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-gold/40 mr-6 group-hover:text-gold/80 transition">02</span><div><h3 class="font-bold text-white group-hover:text-gold text-lg">عيشالك</h3><p class="text-sm text-gray-300 font-medium">to the moon</p><p class="text-sm italic text-gray-400 mt-1">"our engagement song"</p></div></div>
+                <a href="https://www.youtube.com/watch?v=J9n07OdPiA8" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">02</span><div><h3 class="font-bold text-white text-lg">عيشالك</h3><p class="text-sm text-white/70 font-medium mt-1">to the moon</p><p class="text-sm italic text-white/50 mt-1">"our engagement song"</p></div></div>
                 </a>
-                <a href="https://www.youtube.com/watch?v=Knl0840P6ic" target="_blank" class="block p-5 bg-black/40 border border-gold/20 rounded-xl hover:bg-black/60 transition group shadow-sm hover:shadow-md">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-gold/40 mr-6 group-hover:text-gold/80 transition">03</span><div><h3 class="font-bold text-white group-hover:text-gold text-lg">مولاتي</h3><p class="text-sm text-gray-300 font-medium">and never</p><p class="text-sm italic text-gray-400 mt-1">"reminds me of you"</p></div></div>
+                <a href="https://www.youtube.com/watch?v=Knl0840P6ic" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">03</span><div><h3 class="font-bold text-white text-lg">مولاتي</h3><p class="text-sm text-white/70 font-medium mt-1">and never</p><p class="text-sm italic text-white/50 mt-1">"reminds me of you"</p></div></div>
                 </a>
-                <a href="https://www.youtube.com/watch?v=amy2fttDCb8" target="_blank" class="block p-5 bg-black/40 border border-gold/20 rounded-xl hover:bg-black/60 transition group shadow-sm hover:shadow-md">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-gold/40 mr-6 group-hover:text-gold/80 transition">04</span><div><h3 class="font-bold text-white group-hover:text-gold text-lg">وماله</h3><p class="text-sm text-gray-300 font-medium">and never back</p><p class="text-sm italic text-gray-400 mt-1">"our engagement song"</p></div></div>
+                <a href="https://www.youtube.com/watch?v=amy2fttDCb8" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">04</span><div><h3 class="font-bold text-white text-lg">وماله</h3><p class="text-sm text-white/70 font-medium mt-1">and never back</p><p class="text-sm italic text-white/50 mt-1">"our engagement song"</p></div></div>
                 </a>
-                <a href="https://www.youtube.com/watch?v=_5GOjjcOSaM" target="_blank" class="block p-5 bg-black/40 border border-gold/20 rounded-xl hover:bg-black/60 transition group shadow-sm hover:shadow-md">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-gold/40 mr-6 group-hover:text-gold/80 transition">05</span><div><h3 class="font-bold text-white group-hover:text-gold text-lg">صدقني خلاص</h3><p class="text-sm text-gray-300 font-medium">To the eternity</p><p class="text-sm italic text-gray-400 mt-1">"first song to hear together"</p></div></div>
+                <a href="https://www.youtube.com/watch?v=_5GOjjcOSaM" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">05</span><div><h3 class="font-bold text-white text-lg">صدقني خلاص</h3><p class="text-sm text-white/70 font-medium mt-1">To the eternity</p><p class="text-sm italic text-white/50 mt-1">"first song to hear together"</p></div></div>
                 </a>
-                <a href="https://www.youtube.com/watch?v=12SnjPcw25w" target="_blank" class="block p-5 bg-black/40 border border-gold/20 rounded-xl hover:bg-black/60 transition group shadow-sm hover:shadow-md">
-                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-gold/40 mr-6 group-hover:text-gold/80 transition">06</span><div><h3 class="font-bold text-white group-hover:text-gold text-lg">DIVA</h3><p class="text-sm text-gray-300 font-medium">and beyond</p><p class="text-sm italic text-gray-400 mt-1">"first time (dumyat el jedidah) , reminds me of the early us"</p></div></div>
+                <a href="https://www.youtube.com/watch?v=12SnjPcw25w" target="_blank" class="block p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-2xl font-serif font-bold text-white/30 mr-6 group-hover:text-white transition">06</span><div><h3 class="font-bold text-white text-lg">DIVA</h3><p class="text-sm text-white/70 font-medium mt-1">and beyond</p><p class="text-sm italic text-white/50 mt-1">"first time (dumyat el jedidah) , reminds me of the early us"</p></div></div>
                 </a>
             </div>
         </div>
@@ -355,32 +359,34 @@
     <!-- 10. Time Together -->
     <div class="fade-in">
         <div class="card text-center">
-            <p class="text-xs text-gold uppercase tracking-widest font-bold mb-3">💞 SINCE JANUARY 21, 2025</p>
-            <h2 class="font-serif text-4xl mb-2 font-medium text-gold">Every Moment With You</h2>
-            <p class="text-cream text-sm opacity-90 mb-8">We've been making memories together for</p>
+            <p class="text-xs text-white/70 uppercase tracking-widest font-bold mb-4">💞 SINCE JANUARY 21, 2025</p>
+            <h2 class="font-serif text-4xl mb-4 font-medium text-white">Every Moment With You</h2>
+            <p class="text-white/80 text-sm mb-10">We've been making memories together for</p>
             
             <div class="grid grid-cols-3 md:grid-cols-6 gap-3 mb-2">
-                <div class="bg-black/40 rounded-xl p-4 backdrop-blur-md border border-gold/20 shadow-inner"><p id="t-years" class="text-3xl font-bold text-gold">0</p><p class="text-[10px] uppercase mt-2 tracking-wider">Years</p></div>
-                <div class="bg-black/40 rounded-xl p-4 backdrop-blur-md border border-gold/20 shadow-inner"><p id="t-months" class="text-3xl font-bold text-gold">0</p><p class="text-[10px] uppercase mt-2 tracking-wider">Months</p></div>
-                <div class="bg-black/40 rounded-xl p-4 backdrop-blur-md border border-gold/20 shadow-inner"><p id="t-days" class="text-3xl font-bold text-gold">0</p><p class="text-[10px] uppercase mt-2 tracking-wider">Days</p></div>
-                <div class="bg-black/40 rounded-xl p-4 backdrop-blur-md border border-gold/20 shadow-inner"><p id="t-hours" class="text-3xl font-bold text-gold">0</p><p class="text-[10px] uppercase mt-2 tracking-wider">Hours</p></div>
-                <div class="bg-black/40 rounded-xl p-4 backdrop-blur-md border border-gold/20 shadow-inner"><p id="t-mins" class="text-3xl font-bold text-gold">0</p><p class="text-[10px] uppercase mt-2 tracking-wider">Minutes</p></div>
-                <div class="bg-black/40 rounded-xl p-4 backdrop-blur-md border border-gold/20 shadow-inner"><p id="t-secs" class="text-3xl font-bold text-gold">0</p><p class="text-[10px] uppercase mt-2 tracking-wider">Seconds</p></div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-years" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Years</p></div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-months" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Months</p></div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-days" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Days</p></div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-hours" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Hours</p></div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-mins" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Minutes</p></div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10 shadow-inner"><p id="t-secs" class="text-3xl font-bold text-white">0</p><p class="text-[10px] text-white/60 uppercase mt-2 tracking-wider font-bold">Seconds</p></div>
             </div>
         </div>
     </div>
 
-    <!-- 11. Photo Carousel 4 (Photos 16-20) -->
+    <!-- 11. Photo Carousel 4 -->
     <div class="fade-in">
         <div class="card text-center">
-            <p class="text-xs font-bold text-gold opacity-80 tracking-widest uppercase mb-6">FOREVER</p>
-            <div id="carousel4" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(4)">
+            <div class="mb-10 inline-flex items-center justify-center border-b border-white/20 pb-3 px-4">
+                <h3 class="text-sm md:text-base font-bold text-white tracking-[0.25em] uppercase">Forever</h3>
+            </div>
+            <div id="carousel4" class="relative max-w-sm mx-auto cursor-pointer group" onclick="nextSlide(4)">
                 <div class="polaroid active"><img src="16.jpeg" alt="1"><p class="font-handwriting text-3xl mt-4 text-burgundy">EVERY</p></div>
                 <div class="polaroid"><img src="17.jpeg" alt="2"><p class="font-handwriting text-3xl mt-4 text-burgundy">PLACE</p></div>
                 <div class="polaroid"><img src="18.jpeg" alt="3"><p class="font-handwriting text-3xl mt-4 text-burgundy">WE WENT</p></div>
                 <div class="polaroid"><img src="19.jpeg" alt="4"><p class="font-handwriting text-3xl mt-4 text-burgundy">TOGETHER</p></div>
                 <div class="polaroid"><img src="20.jpeg" alt="5"><p class="font-handwriting text-3xl mt-4 text-burgundy">IS A WORLD TO ME</p></div>
-                <p class="text-xs text-cream opacity-70 mt-6 font-medium">TAP TO CHANGE PHOTOS (<span id="count4">1</span>/5)</p>
+                <p class="text-xs text-white/50 mt-8 font-medium tracking-widest transition group-hover:text-white/80">TAP TO CHANGE PHOTOS (<span id="count4">1</span>/5)</p>
             </div>
         </div>
     </div>
@@ -388,19 +394,19 @@
     <!-- 12. Moon Phase -->
     <div class="fade-in pb-12">
         <div class="card text-center">
-            <h2 class="font-serif text-3xl text-gold mb-2 font-medium">The moon that night</h2>
-            <p class="text-cream opacity-80 text-sm mb-10">This is what the sky looked like at our engagement</p>
-            <p class="text-[10px] text-gold font-bold tracking-widest uppercase mb-10">July 27, 2026 • Mansoura, Egypt</p>
+            <h2 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">The moon that night</h2>
+            <p class="text-white/80 text-sm mb-8">This is what the sky looked like at our engagement</p>
+            <p class="text-xs text-white/60 font-bold tracking-[0.15em] uppercase mb-12">July 27, 2026 • Mansoura, Egypt</p>
             
             <div class="moon"></div>
             
-            <div class="flex justify-center gap-4 mt-10">
-                <div class="bg-black/40 border border-gold/20 rounded-lg px-8 py-3 shadow-sm">
-                    <p class="font-bold text-gold text-lg">Waxing Gibbous</p>
+            <div class="flex justify-center gap-4 mt-12">
+                <div class="bg-white/5 border border-white/10 rounded-xl px-8 py-4 shadow-sm">
+                    <p class="font-bold text-white text-lg">Waxing Gibbous</p>
                 </div>
-                <div class="bg-black/40 border border-gold/20 rounded-lg px-8 py-3 shadow-sm">
-                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Illumination</p>
-                    <p class="font-bold text-gold text-lg">96%</p>
+                <div class="bg-white/5 border border-white/10 rounded-xl px-8 py-4 shadow-sm">
+                    <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">Illumination</p>
+                    <p class="font-bold text-white text-lg">96%</p>
                 </div>
             </div>
         </div>
@@ -436,8 +442,8 @@
             var duration = 3 * 1000;
             var end = Date.now() + duration;
             (function frame() {
-                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#800020', '#5B0E1B', '#D4AF37', '#ffffff'] });
-                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#800020', '#5B0E1B', '#D4AF37', '#ffffff'] });
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#800020', '#5B0E1B', '#ffffff', '#f0f0f0'] });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#800020', '#5B0E1B', '#ffffff', '#f0f0f0'] });
                 if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
@@ -478,7 +484,7 @@
                 
                 resultText.innerText = prizes[slice];
                 resultText.style.opacity = "1";
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#D4AF37'] });
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ffffff', '#e0e0e0'] });
             }, 4000);
         }
 
