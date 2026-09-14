@@ -36,13 +36,42 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
     <style>
-        body { background-color: #FCF9F6; color: #333; overflow-x: hidden; }
-        .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px -5px rgba(128, 0, 32, 0.08); padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(128,0,32,0.05); }
+        body { 
+            /* Deep dark red gradient */
+            background: linear-gradient(135deg, #1a0505 0%, #3a0810 50%, #1a0505 100%); 
+            color: #333; 
+            overflow-x: hidden; 
+            position: relative;
+        }
+
+        /* SVG Noise Texture Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Floating Background Graphics */
+        .bg-graphic-1 {
+            position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(128, 0, 32, 0.25) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(80px); z-index: -2; pointer-events: none;
+        }
+        .bg-graphic-2 {
+            position: fixed; bottom: -10%; right: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(80px); z-index: -2; pointer-events: none;
+        }
+
+        .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3); padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(128,0,32,0.1); position: relative; z-index: 10; }
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         
         /* Polaroid Style */
-        .polaroid { background: white; padding: 10px 10px 25px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transform: rotate(-2deg); transition: transform 0.3s ease; display: none; }
+        .polaroid { background: white; padding: 10px 10px 25px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transform: rotate(-2deg); transition: transform 0.3s ease; display: none; }
         .polaroid.active { display: block; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         .polaroid img { width: 100%; height: 300px; object-fit: cover; background-color: #eee; }
         @keyframes popIn { from { opacity: 0; transform: scale(0.9) rotate(-5deg); } to { opacity: 1; transform: scale(1) rotate(-2deg); } }
@@ -64,6 +93,10 @@
     </style>
 </head>
 <body class="antialiased py-8 px-4 max-w-2xl mx-auto">
+
+    <!-- Background Graphics -->
+    <div class="bg-graphic-1"></div>
+    <div class="bg-graphic-2"></div>
 
     <!-- 1. Header -->
     <div class="card text-center fade-in pt-12 pb-12">
@@ -346,4 +379,4 @@
         }, 1000);
     </script>
 </body>
-</html> 
+</html>
