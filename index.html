@@ -54,21 +54,55 @@
             z-index: -1;
         }
 
-        /* Floating Background Graphics */
+        /* Animated Motion Graphics */
+        .bg-graphic { position: fixed; filter: blur(90px); z-index: -2; pointer-events: none; border-radius: 50%; }
+        
         .bg-graphic-1 {
-            position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
-            background: radial-gradient(circle, rgba(128, 0, 32, 0.25) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(80px); z-index: -2; pointer-events: none;
+            top: -10%; left: -10%; width: 50vw; height: 50vw;
+            background: rgba(128, 0, 32, 0.35);
+            animation: drift1 20s infinite alternate ease-in-out;
         }
         .bg-graphic-2 {
-            position: fixed; bottom: -10%; right: -10%; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(80px); z-index: -2; pointer-events: none;
+            bottom: -10%; right: -10%; width: 60vw; height: 60vw;
+            background: rgba(212, 175, 55, 0.15);
+            animation: drift2 25s infinite alternate ease-in-out;
+        }
+        .bg-graphic-3 {
+            top: 30%; left: 40%; width: 40vw; height: 40vw;
+            background: rgba(91, 14, 27, 0.3);
+            animation: drift3 22s infinite alternate ease-in-out;
         }
 
-        .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3); padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(128,0,32,0.1); position: relative; z-index: 10; }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @keyframes drift1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(10vw, 15vh) scale(1.2); } }
+        @keyframes drift2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-15vw, -10vh) scale(1.1); } }
+        @keyframes drift3 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-10vw, 20vh) scale(1.3); } }
+
+        /* Glassmorphism & Floating Effect */
+        .card { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 24px; 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.2); 
+            padding: 2rem; 
+            margin-bottom: 2rem; 
+            position: relative; 
+            z-index: 10; 
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Stagger float animations slightly */
+        .card:nth-child(even) { animation-delay: -3s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.2); }
+            100% { transform: translateY(0px); }
+        }
+
+        .fade-in { opacity: 0; transition: opacity 0.8s ease-in-out; }
+        .fade-in.visible { opacity: 1; }
         
         /* Polaroid Style */
         .polaroid { background: white; padding: 10px 10px 25px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transform: rotate(-2deg); transition: transform 0.3s ease; display: none; }
@@ -94,191 +128,273 @@
 </head>
 <body class="antialiased py-8 px-4 max-w-2xl mx-auto">
 
-    <!-- Background Graphics -->
-    <div class="bg-graphic-1"></div>
-    <div class="bg-graphic-2"></div>
+    <!-- Background Motion Graphics -->
+    <div class="bg-graphic bg-graphic-1"></div>
+    <div class="bg-graphic bg-graphic-2"></div>
+    <div class="bg-graphic bg-graphic-3"></div>
 
     <!-- 1. Header -->
-    <div class="card text-center fade-in pt-12 pb-12">
-        <h1 class="font-serif text-4xl md:text-5xl text-burgundy mb-4 font-semibold">Happy Birthday, My Everything</h1>
-        <p class="text-gray-600 font-sans md:text-lg">Today we celebrate the most amazing person in my world 🎂</p>
+    <div class="fade-in pt-4">
+        <div class="card text-center pt-12 pb-12">
+            <h1 class="font-serif text-4xl md:text-5xl text-burgundy mb-4 font-semibold">Happy Birthday, My Everything</h1>
+            <p class="text-gray-600 font-sans md:text-lg">Today we celebrate the most amazing person in my world 🎂</p>
+        </div>
     </div>
 
     <!-- 2. Confetti Explosion -->
-    <div class="card text-center fade-in">
-        <h2 class="font-serif text-2xl text-darkred mb-1">Any thing you wish will become true</h2>
-        <p class="text-xs text-gray-500 mb-6 uppercase tracking-widest">I LOVE YOU , NWNW</p>
-        <button onclick="fireConfetti()" class="bg-burgundy hover:bg-darkred text-white font-semibold py-4 px-8 rounded-full shadow-lg transform transition hover:scale-105">
-            🎂 MAKE A WISH 🎂
-        </button>
+    <div class="fade-in">
+        <div class="card text-center">
+            <h2 class="font-serif text-2xl text-darkred mb-1">Any thing you wish will become true</h2>
+            <p class="text-xs text-gray-500 mb-6 uppercase tracking-widest">I LOVE YOU , NWNW</p>
+            <button onclick="fireConfetti()" class="bg-burgundy hover:bg-darkred text-white font-semibold py-4 px-8 rounded-full shadow-lg transform transition hover:scale-105">
+                🎂 MAKE A WISH 🎂
+            </button>
+        </div>
     </div>
 
     <!-- 3. Photo Carousel 1 -->
-    <div class="card fade-in text-center">
-        <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">memories...</p>
-        <div id="carousel1" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(1)">
-            <div class="polaroid active"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">YOU WILL</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">ALWAYS</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">BE MY</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">BEST</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">MEMORY</p></div>
-            <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count1">1</span>/5)</p>
+    <div class="fade-in">
+        <div class="card text-center">
+            <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">memories...</p>
+            <div id="carousel1" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(1)">
+                <div class="polaroid active"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">YOU WILL</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">ALWAYS</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">BE MY</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">BEST</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">MEMORY</p></div>
+                <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count1">1</span>/5)</p>
+            </div>
         </div>
     </div>
 
-    <!-- 4. Things I Love -->
-    <div class="card fade-in">
-        <div class="text-center mb-8">
-            <h2 class="font-serif text-3xl text-burgundy mb-2">Reasons You Make My World Brighter</h2>
-            <p class="text-gray-500 text-sm">A little list of all the things I adore about you</p>
+    <!-- 4. Things I Love (Pills Layout) -->
+    <div class="fade-in">
+        <div class="card">
+            <div class="text-center mb-8">
+                <h2 class="font-serif text-3xl text-burgundy mb-2">Reasons You Make My World Brighter</h2>
+                <p class="text-gray-500 text-sm">A little list of all the things I adore about you</p>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+                <!-- Pill 1 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-full shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full">✨</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">The way you light up every room you enter</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">Like a star , that always guide me</p>
+                    </div>
+                </div>
+                <!-- Pill 2 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-full shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full">😍</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">Your laugh that I could listen to forever</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">btd7ky 7lw awy lama btb2y 3abeta, daymn btkon f wdny</p>
+                    </div>
+                </div>
+                <!-- Pill 3 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-full shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full">💘</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">you act as my entire world</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">daymn ad mas2olyt enk tkoony kol 7aga lya f el dunia</p>
+                    </div>
+                </div>
+                <!-- Pill 4 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-[2rem] shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full flex-shrink-0">🌹</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">Your big support and even bigger heart</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">kol mara btb2y enty el sabb f kol 7aga 7lwa w kol nga7</p>
+                    </div>
+                </div>
+                <!-- Pill 5 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-[2rem] shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full flex-shrink-0">❤️</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">The way you make ordinary days feel special</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">kol youm m3aky mhma kan 3ady, byb2a youm momyz fa45</p>
+                    </div>
+                </div>
+                <!-- Pill 6 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-full shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full flex-shrink-0">😘</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">How safe and happy I feel by your side</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">daymn b7s bra7a w dafa w enty mwgooda</p>
+                    </div>
+                </div>
+                <!-- Pill 7 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-[2rem] shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full flex-shrink-0">✨</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">Every adventure we've shared, and the ones to come</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">kol zekra bena , hya el zekra el tst72 afdl fakerha</p>
+                    </div>
+                </div>
+                <!-- Pill 8 -->
+                <div class="flex items-center gap-4 bg-white/60 border border-burgundy/10 px-5 py-3 rounded-[2rem] shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-300">
+                    <span class="text-2xl bg-cream w-10 h-10 flex items-center justify-center rounded-full flex-shrink-0">💋</span>
+                    <div class="text-left leading-tight">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">Simply being you, the best gift of all</p>
+                        <p class="text-gray-500 font-handwriting text-lg md:text-xl">enty el bt5ly kol 7aga 7lwa , 7rfyn agml ne3ma lya!</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <ul class="space-y-6">
-            <li class="flex items-start"><span class="text-2xl mr-4">✨</span><div><p class="font-semibold text-gray-800">The way you light up every room you enter</p><p class="text-sm text-gray-500 font-handwriting text-xl">Like a star , that always guide me</p></div></li>
-            <li class="flex items-start"><span class="text-2xl mr-4">😍</span><div><p class="font-semibold text-gray-800">Your laugh that I could listen to forever</p><p class="text-sm text-gray-500 font-handwriting text-xl">btd7ky 7lw awy lama btb2y 3abeta, daymn btkon f wdny m4 bttl3</p></div></li>
-            <li class="flex items-start"><span class="text-2xl mr-4">💘</span><div><p class="font-semibold text-gray-800">you act as my entire world</p><p class="text-sm text-gray-500 font-handwriting text-xl">daymn ad mas2olyt enk tkoony kol 7aga lya f el dunia , 7abebty , bety , bnty , w kol 7aga bgd</p></div></li>
-            <li class="flex items-start"><span class="text-2xl mr-4">🌹</span><div><p class="font-semibold text-gray-800">Your big support and even bigger heart</p><p class="text-sm text-gray-500 font-handwriting text-xl">kol mara btb2y enty el sabb f kol 7aga 7lwa w kol nga7 , mn 8irk makn4 zmany wslt l ay 7aga</p></div></li>
-            <li class="flex items-start"><span class="text-2xl mr-4">❤️</span><div><p class="font-semibold text-gray-800">The way you make ordinary days feel special</p><p class="text-sm text-gray-500 font-handwriting text-xl">kol youm m3aky mhma kan 3ady, byb2a youm momyz fa45</p></div></li>
-            <li class="flex items-start"><span class="text-2xl mr-4">😘</span><div><p class="font-semibold text-gray-800">How safe and happy I feel by your side</p><p class="text-sm text-gray-500 font-handwriting text-xl">daymn b7s bra7a w dafa w enty mwgooda, even in the darkest days</p></div></li>
-            <li class="flex items-start"><span class="text-2xl mr-4">✨</span><div><p class="font-semibold text-gray-800">Every adventure we've shared, and the ones to come</p><p class="text-sm text-gray-500 font-handwriting text-xl">kol zekra bena , hya el zekra el tst72 afdl fakerha 3omry kolo</p></div></li>
-            <li class="flex items-start"><span class="text-2xl mr-4">💋</span><div><p class="font-semibold text-gray-800">Simply being you, the best gift of all</p><p class="text-sm text-gray-500 font-handwriting text-xl">enty el bt5ly kol 7aga 7lwa , 7rfyn agml ne3ma w hdya mn rabena lya!</p></div></li>
-        </ul>
     </div>
 
     <!-- 5. Photo Carousel 2 -->
-    <div class="card fade-in text-center">
-        <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">That will always</p>
-        <div id="carousel2" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(2)">
-            <div class="polaroid active"><img src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">No words</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1581022295087-35e593704911?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">that can</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1543616991-75a2c125ff5b?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">describe</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1620052581237-5d3dfbb02517?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">how much</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">I love you</p></div>
-            <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count2">1</span>/5)</p>
+    <div class="fade-in">
+        <div class="card text-center">
+            <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">That will always</p>
+            <div id="carousel2" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(2)">
+                <div class="polaroid active"><img src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">No words</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1581022295087-35e593704911?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">that can</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1543616991-75a2c125ff5b?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">describe</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1620052581237-5d3dfbb02517?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">how much</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">I love you</p></div>
+                <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count2">1</span>/5)</p>
+            </div>
         </div>
     </div>
 
     <!-- 6. Prize Wheel -->
-    <div class="card fade-in text-center">
-        <h2 class="font-serif text-3xl text-burgundy mb-2">Spin for Your Birthday Surprise</h2>
-        <p class="text-gray-500 text-sm uppercase tracking-widest mb-4">we will do it ,later just me and you</p>
-        <div class="wheel-container">
-            <div class="wheel-pointer"></div>
-            <div id="wheel" class="wheel" style="background: conic-gradient(#800020 0deg 60deg, #5B0E1B 60deg 120deg, #800020 120deg 180deg, #5B0E1B 180deg 240deg, #800020 240deg 300deg, #5B0E1B 300deg 360deg);"></div>
+    <div class="fade-in">
+        <div class="card text-center">
+            <h2 class="font-serif text-3xl text-burgundy mb-2">Spin for Your Birthday Surprise</h2>
+            <p class="text-gray-500 text-sm uppercase tracking-widest mb-4">we will do it ,later just me and you</p>
+            <div class="wheel-container">
+                <div class="wheel-pointer"></div>
+                <div id="wheel" class="wheel" style="background: conic-gradient(#800020 0deg 60deg, #5B0E1B 60deg 120deg, #800020 120deg 180deg, #5B0E1B 180deg 240deg, #800020 240deg 300deg, #5B0E1B 300deg 360deg);"></div>
+            </div>
+            <button id="spinBtn" onclick="spinWheel()" class="bg-burgundy hover:bg-darkred text-white font-semibold py-3 px-8 rounded-full shadow-md transform transition hover:scale-105 mt-4">
+                Spin the Wheel
+            </button>
+            <p id="prizeResult" class="mt-4 font-serif text-xl font-bold text-gold h-8 transition-opacity opacity-0"></p>
         </div>
-        <button id="spinBtn" onclick="spinWheel()" class="bg-burgundy hover:bg-darkred text-white font-semibold py-3 px-8 rounded-full shadow-md transform transition hover:scale-105 mt-4">
-            Spin the Wheel
-        </button>
-        <p id="prizeResult" class="mt-4 font-serif text-xl font-bold text-gold h-8 transition-opacity opacity-0"></p>
     </div>
 
     <!-- 7. Letter -->
-    <div class="card fade-in text-center">
-        <div class="envelope-container inline-block" onclick="toggleLetter()">
-            <div class="w-32 h-24 bg-burgundy rounded relative mx-auto shadow-md flex items-center justify-center">
-                <div class="absolute w-full h-full border-4 border-darkred rounded opacity-50"></div>
-                <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center font-serif text-white font-bold text-xl shadow-inner">R</div>
+    <div class="fade-in">
+        <div class="card text-center">
+            <div class="envelope-container inline-block" onclick="toggleLetter()">
+                <div class="w-32 h-24 bg-burgundy rounded relative mx-auto shadow-md flex items-center justify-center">
+                    <div class="absolute w-full h-full border-4 border-darkred rounded opacity-50"></div>
+                    <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center font-serif text-white font-bold text-xl shadow-inner">R</div>
+                </div>
+                <p class="text-xs text-gray-500 font-bold tracking-widest mt-4">TAP ME.</p>
             </div>
-            <p class="text-xs text-gray-500 font-bold tracking-widest mt-4">TAP ME.</p>
-        </div>
-        
-        <div id="letterContent" class="letter-content text-left font-handwriting text-burgundy mt-8">
-            <p>nwnw,</p>
-            <p class="text-right text-sm">15/9/2026</p>
-            <p class="mt-4">Happy birthday to the person who holds my whole heart. Today is all about you — the way you light up every room, your beautiful heart, and the joy you bring to my life every single day. I hope this year is as wonderful as you make the world for everyone around you.</p>
-            <p class="mt-4">This is our second birthday together, and definitely not the last one. I can’t wait for all the birthdays, memories, little moments, and adventures still waiting for us. I’ll always adore you, celebrate you, and choose you, today and every day after.</p>
-            <p class="mt-4">Thank you for being exactly who you are, and for being my everything. There are honestly no words that could ever describe how much I love you or how much you mean to me.</p>
-            <p class="mt-4">I love you, today, tomorrow, and always. Happy birthday, RAVE. ❤️ بحبك.</p>
-            <p class="mt-6 font-bold">Hamoodk</p>
+            
+            <div id="letterContent" class="letter-content text-left font-handwriting text-burgundy mt-8">
+                <p>nwnw,</p>
+                <p class="text-right text-sm">15/9/2026</p>
+                <p class="mt-4">Happy birthday to the person who holds my whole heart. Today is all about you — the way you light up every room, your beautiful heart, and the joy you bring to my life every single day. I hope this year is as wonderful as you make the world for everyone around you.</p>
+                <p class="mt-4">This is our second birthday together, and definitely not the last one. I can’t wait for all the birthdays, memories, little moments, and adventures still waiting for us. I’ll always adore you, celebrate you, and choose you, today and every day after.</p>
+                <p class="mt-4">Thank you for being exactly who you are, and for being my everything. There are honestly no words that could ever describe how much I love you or how much you mean to me.</p>
+                <p class="mt-4">I love you, today, tomorrow, and always. Happy birthday, RAVE. ❤️ بحبك.</p>
+                <p class="mt-6 font-bold">Hamoodk</p>
+            </div>
         </div>
     </div>
 
     <!-- 8. Photo Carousel 3 -->
-    <div class="card fade-in text-center">
-        <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">LIVE</p>
-        <div id="carousel3" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(3)">
-            <div class="polaroid active"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">YOU WILL</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">ALWAYS</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">MEAN</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">EVERYTHING</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">FOR ME</p></div>
-            <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count3">1</span>/5)</p>
+    <div class="fade-in">
+        <div class="card text-center">
+            <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">LIVE</p>
+            <div id="carousel3" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(3)">
+                <div class="polaroid active"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">YOU WILL</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">ALWAYS</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">MEAN</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">EVERYTHING</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">FOR ME</p></div>
+                <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count3">1</span>/5)</p>
+            </div>
         </div>
     </div>
 
     <!-- 9. Favorite Songs -->
-    <div class="card fade-in">
-        <div class="text-center mb-6">
-            <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">our memories</p>
-            <h2 class="font-serif text-3xl text-burgundy mb-1">our songs</h2>
-            <p class="text-gray-500 text-sm font-handwriting text-xl">just me and you</p>
-        </div>
-        <div class="space-y-4">
-            <a href="https://www.youtube.com/watch?v=H9MUAiBeb3w" target="_blank" class="block p-4 border border-gray-100 rounded-lg hover:border-burgundy transition group">
-                <div class="flex items-center"><span class="text-xl font-bold text-gray-300 mr-4">01</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">انا من غيرك</h3><p class="text-sm text-gray-500">love you</p><p class="text-sm italic text-gray-400 mt-1">"just it is me without you"</p></div></div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=J9n07OdPiA8" target="_blank" class="block p-4 border border-gray-100 rounded-lg hover:border-burgundy transition group">
-                <div class="flex items-center"><span class="text-xl font-bold text-gray-300 mr-4">02</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">عيشالك</h3><p class="text-sm text-gray-500">to the moon</p><p class="text-sm italic text-gray-400 mt-1">"our engagement song"</p></div></div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=Knl0840P6ic" target="_blank" class="block p-4 border border-gray-100 rounded-lg hover:border-burgundy transition group">
-                <div class="flex items-center"><span class="text-xl font-bold text-gray-300 mr-4">03</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">مولاتي</h3><p class="text-sm text-gray-500">and never</p><p class="text-sm italic text-gray-400 mt-1">"reminds me of you"</p></div></div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=amy2fttDCb8" target="_blank" class="block p-4 border border-gray-100 rounded-lg hover:border-burgundy transition group">
-                <div class="flex items-center"><span class="text-xl font-bold text-gray-300 mr-4">04</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">وماله</h3><p class="text-sm text-gray-500">and never back</p><p class="text-sm italic text-gray-400 mt-1">"our engagement song"</p></div></div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=_5GOjjcOSaM" target="_blank" class="block p-4 border border-gray-100 rounded-lg hover:border-burgundy transition group">
-                <div class="flex items-center"><span class="text-xl font-bold text-gray-300 mr-4">05</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">صدقني خلاص</h3><p class="text-sm text-gray-500">To the eternity</p><p class="text-sm italic text-gray-400 mt-1">"first song to hear together"</p></div></div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=12SnjPcw25w" target="_blank" class="block p-4 border border-gray-100 rounded-lg hover:border-burgundy transition group">
-                <div class="flex items-center"><span class="text-xl font-bold text-gray-300 mr-4">06</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">DIVA</h3><p class="text-sm text-gray-500">and beyond</p><p class="text-sm italic text-gray-400 mt-1">"first time (dumyat el jedidah) , reminds me of the early us"</p></div></div>
-            </a>
+    <div class="fade-in">
+        <div class="card">
+            <div class="text-center mb-6">
+                <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">our memories</p>
+                <h2 class="font-serif text-3xl text-burgundy mb-1">our songs</h2>
+                <p class="text-gray-500 text-sm font-handwriting text-xl">just me and you</p>
+            </div>
+            <div class="space-y-4">
+                <a href="https://www.youtube.com/watch?v=H9MUAiBeb3w" target="_blank" class="block p-4 bg-white/50 border border-burgundy/10 rounded-xl hover:bg-white transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-xl font-bold text-burgundy/30 mr-4">01</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">انا من غيرك</h3><p class="text-sm text-gray-500">love you</p><p class="text-sm italic text-gray-400 mt-1">"just it is me without you"</p></div></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=J9n07OdPiA8" target="_blank" class="block p-4 bg-white/50 border border-burgundy/10 rounded-xl hover:bg-white transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-xl font-bold text-burgundy/30 mr-4">02</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">عيشالك</h3><p class="text-sm text-gray-500">to the moon</p><p class="text-sm italic text-gray-400 mt-1">"our engagement song"</p></div></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=Knl0840P6ic" target="_blank" class="block p-4 bg-white/50 border border-burgundy/10 rounded-xl hover:bg-white transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-xl font-bold text-burgundy/30 mr-4">03</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">مولاتي</h3><p class="text-sm text-gray-500">and never</p><p class="text-sm italic text-gray-400 mt-1">"reminds me of you"</p></div></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=amy2fttDCb8" target="_blank" class="block p-4 bg-white/50 border border-burgundy/10 rounded-xl hover:bg-white transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-xl font-bold text-burgundy/30 mr-4">04</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">وماله</h3><p class="text-sm text-gray-500">and never back</p><p class="text-sm italic text-gray-400 mt-1">"our engagement song"</p></div></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=_5GOjjcOSaM" target="_blank" class="block p-4 bg-white/50 border border-burgundy/10 rounded-xl hover:bg-white transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-xl font-bold text-burgundy/30 mr-4">05</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">صدقني خلاص</h3><p class="text-sm text-gray-500">To the eternity</p><p class="text-sm italic text-gray-400 mt-1">"first song to hear together"</p></div></div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=12SnjPcw25w" target="_blank" class="block p-4 bg-white/50 border border-burgundy/10 rounded-xl hover:bg-white transition group shadow-sm">
+                    <div class="flex items-center"><span class="text-xl font-bold text-burgundy/30 mr-4">06</span><div><h3 class="font-bold text-darkred group-hover:text-burgundy">DIVA</h3><p class="text-sm text-gray-500">and beyond</p><p class="text-sm italic text-gray-400 mt-1">"first time (dumyat el jedidah) , reminds me of the early us"</p></div></div>
+                </a>
+            </div>
         </div>
     </div>
 
     <!-- 10. Time Together -->
-    <div class="card fade-in text-center bg-burgundy text-white">
-        <p class="text-xs text-gold uppercase tracking-widest font-bold mb-2">💞 SINCE JANUARY 21, 2025</p>
-        <h2 class="font-serif text-3xl mb-2">Every Moment With You</h2>
-        <p class="text-cream text-sm opacity-80 mb-6">We've been making memories together for</p>
-        
-        <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-4">
-            <div class="bg-darkred rounded p-3"><p id="t-years" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase">Years</p></div>
-            <div class="bg-darkred rounded p-3"><p id="t-months" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase">Months</p></div>
-            <div class="bg-darkred rounded p-3"><p id="t-days" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase">Days</p></div>
-            <div class="bg-darkred rounded p-3"><p id="t-hours" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase">Hours</p></div>
-            <div class="bg-darkred rounded p-3"><p id="t-mins" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase">Minutes</p></div>
-            <div class="bg-darkred rounded p-3"><p id="t-secs" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase">Seconds</p></div>
+    <div class="fade-in">
+        <div class="card text-center bg-burgundy/90 text-white border-white/20">
+            <p class="text-xs text-gold uppercase tracking-widest font-bold mb-2">💞 SINCE JANUARY 21, 2025</p>
+            <h2 class="font-serif text-3xl mb-2">Every Moment With You</h2>
+            <p class="text-cream text-sm opacity-80 mb-6">We've been making memories together for</p>
+            
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-4">
+                <div class="bg-black/30 rounded-xl p-3 backdrop-blur-sm border border-white/10"><p id="t-years" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase mt-1">Years</p></div>
+                <div class="bg-black/30 rounded-xl p-3 backdrop-blur-sm border border-white/10"><p id="t-months" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase mt-1">Months</p></div>
+                <div class="bg-black/30 rounded-xl p-3 backdrop-blur-sm border border-white/10"><p id="t-days" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase mt-1">Days</p></div>
+                <div class="bg-black/30 rounded-xl p-3 backdrop-blur-sm border border-white/10"><p id="t-hours" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase mt-1">Hours</p></div>
+                <div class="bg-black/30 rounded-xl p-3 backdrop-blur-sm border border-white/10"><p id="t-mins" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase mt-1">Minutes</p></div>
+                <div class="bg-black/30 rounded-xl p-3 backdrop-blur-sm border border-white/10"><p id="t-secs" class="text-3xl font-bold text-gold">0</p><p class="text-xs uppercase mt-1">Seconds</p></div>
+            </div>
         </div>
     </div>
 
     <!-- 11. Photo Carousel 4 -->
-    <div class="card fade-in text-center">
-        <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">FOREVER</p>
-        <div id="carousel4" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(4)">
-            <div class="polaroid active"><img src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">EVERY</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1581022295087-35e593704911?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">PLACE</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1543616991-75a2c125ff5b?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">WE WENT</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1620052581237-5d3dfbb02517?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">TOGETHER</p></div>
-            <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">IS A WORLD TO ME</p></div>
-            <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count4">1</span>/5)</p>
+    <div class="fade-in">
+        <div class="card text-center">
+            <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">FOREVER</p>
+            <div id="carousel4" class="relative max-w-sm mx-auto cursor-pointer" onclick="nextSlide(4)">
+                <div class="polaroid active"><img src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&w=400&q=80" alt="1"><p class="font-handwriting text-2xl mt-4 text-burgundy">EVERY</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1581022295087-35e593704911?auto=format&fit=crop&w=400&q=80" alt="2"><p class="font-handwriting text-2xl mt-4 text-burgundy">PLACE</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1543616991-75a2c125ff5b?auto=format&fit=crop&w=400&q=80" alt="3"><p class="font-handwriting text-2xl mt-4 text-burgundy">WE WENT</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1620052581237-5d3dfbb02517?auto=format&fit=crop&w=400&q=80" alt="4"><p class="font-handwriting text-2xl mt-4 text-burgundy">TOGETHER</p></div>
+                <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" alt="5"><p class="font-handwriting text-2xl mt-4 text-burgundy">IS A WORLD TO ME</p></div>
+                <p class="text-xs text-gray-400 mt-4">TAP TO CHANGE PHOTOS (<span id="count4">1</span>/5)</p>
+            </div>
         </div>
     </div>
 
     <!-- 12. Moon Phase -->
-    <div class="card fade-in text-center pb-12">
-        <h2 class="font-serif text-3xl text-burgundy mb-2">The moon that night</h2>
-        <p class="text-gray-500 text-sm mb-8">This is what the sky looked like at our engagement</p>
-        
-        <div class="moon">
-            <div class="absolute right-0 top-0 w-1/2 h-full bg-black rounded-r-full opacity-90" style="border-radius: 0 100px 100px 0;"></div>
-        </div>
-        
-        <div class="flex justify-center gap-4 mt-8">
-            <div class="bg-gray-50 border border-gray-100 rounded px-6 py-2">
-                <p class="font-bold text-burgundy">Waxing Gibbous</p>
+    <div class="fade-in pb-12">
+        <div class="card text-center">
+            <h2 class="font-serif text-3xl text-burgundy mb-2">The moon that night</h2>
+            <p class="text-gray-500 text-sm mb-8">This is what the sky looked like at our engagement</p>
+            
+            <div class="moon">
+                <div class="absolute right-0 top-0 w-1/2 h-full bg-black rounded-r-full opacity-90" style="border-radius: 0 100px 100px 0;"></div>
             </div>
-            <div class="bg-gray-50 border border-gray-100 rounded px-6 py-2">
-                <p class="text-xs text-gray-400 uppercase">Illumination</p>
-                <p class="font-bold text-burgundy">78%</p>
+            
+            <div class="flex justify-center gap-4 mt-8">
+                <div class="bg-gray-50 border border-gray-100 rounded px-6 py-2">
+                    <p class="font-bold text-burgundy">Waxing Gibbous</p>
+                </div>
+                <div class="bg-gray-50 border border-gray-100 rounded px-6 py-2">
+                    <p class="text-xs text-gray-400 uppercase">Illumination</p>
+                    <p class="font-bold text-burgundy">78%</p>
+                </div>
             </div>
         </div>
     </div>
@@ -337,7 +453,6 @@
                 btn.disabled = false;
                 
                 let actualDegrees = currentRotation % 360;
-                // Reverse calculation because CSS rotate is clockwise
                 let slice = Math.floor((360 - actualDegrees + 30) % 360 / 60);
                 
                 resultText.innerText = prizes[slice];
