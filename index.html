@@ -135,8 +135,18 @@
             background-image: url('https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?auto=format&fit=crop&w=400&q=80');
             background-size: 110%;
             background-position: center;
-            box-shadow: inset 14px 0 18px rgba(0,0,0,0.9), 0 0 50px rgba(255,255,255,0.15); 
+            box-shadow: 0 0 30px rgba(255,255,255,0.05); 
             margin: 2.5rem auto; position: relative;
+            overflow: hidden;
+        }
+        .moon::before {
+            content: "";
+            position: absolute;
+            top: -5%; left: -10%;
+            width: 105%; height: 110%;
+            border-radius: 50%;
+            background: rgba(10, 2, 2, 0.98);
+            box-shadow: inset -10px 0 15px rgba(0,0,0,1);
         }
     </style>
 </head>
@@ -395,18 +405,18 @@
     <div class="fade-in pb-12">
         <div class="card text-center">
             <h2 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">The moon that night</h2>
-            <p class="text-white/80 text-sm mb-8">This is what the sky looked like at our engagement</p>
-            <p class="text-xs text-white/60 font-bold tracking-[0.15em] uppercase mb-12">July 27, 2026 • Mansoura, Egypt</p>
+            <p class="text-white/80 text-sm mb-8">this is what the moon looked at your birth , it was shy from the real moon</p>
+            <p class="text-xs text-white/60 font-bold tracking-[0.15em] uppercase mb-12">September 15, 2004 • Mansoura, Egypt</p>
             
             <div class="moon"></div>
             
             <div class="flex justify-center gap-4 mt-12">
                 <div class="bg-white/5 border border-white/10 rounded-xl px-8 py-4 shadow-sm">
-                    <p class="font-bold text-white text-lg">Waxing Gibbous</p>
+                    <p class="font-bold text-white text-lg">Waxing Crescent</p>
                 </div>
                 <div class="bg-white/5 border border-white/10 rounded-xl px-8 py-4 shadow-sm">
                     <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">Illumination</p>
-                    <p class="font-bold text-white text-lg">96%</p>
+                    <p class="font-bold text-white text-lg">1%</p>
                 </div>
             </div>
         </div>
