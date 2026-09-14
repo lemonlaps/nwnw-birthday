@@ -183,9 +183,11 @@
         #cinematic-ending {
             background: #000000; min-height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; z-index: 100;
+            margin-top: 4rem; border-top: 1px solid rgba(229,212,179,0.1);
         }
         .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+        .star.glowing { box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.8); background: #FAF6EE; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.3); } }
     </style>
 </head>
 <body class="antialiased py-12 px-4 max-w-2xl mx-auto">
@@ -504,6 +506,28 @@
         </div>
     </div>
 
+    <!-- 13. Cinematic Starlight Ending -->
+    <section id="cinematic-ending">
+        <div id="starfield" style="position:absolute; inset:0; pointer-events:none; overflow:hidden;"></div>
+        <div class="fade-in relative z-10 max-w-lg mx-auto">
+            <p class="font-serif text-xl md:text-2xl text-ivory/90 leading-relaxed mb-6 font-light">
+                And somehow,<br>
+                after all these days,<br>
+                I still got lucky enough<br>
+                to find you.<br>
+                and will always choose you<br>
+                every single day.
+            </p>
+            <div class="my-10 h-[1px] w-16 bg-champagne/30 mx-auto"></div>
+            <h3 class="font-serif text-3xl md:text-4xl text-ivory font-semibold mb-4 tracking-wide">
+                Happy Birthday, Nwnw. ❤️
+            </h3>
+            <p class="font-handwriting text-2xl text-champagne/80 tracking-widest mt-6">
+                — Hamoodk
+            </p>
+        </div>
+    </section>
+
     <script>
         // Generate Background Embers dynamically
         const particleContainer = document.getElementById('particles');
@@ -516,6 +540,20 @@
             p.style.left = `${Math.random() * 100}vw`;
             p.style.animationDelay = `${Math.random() * 12}s`;
             particleContainer.appendChild(p);
+        }
+
+        // Generate Starlight Ending Field
+        const starfield = document.getElementById('starfield');
+        for (let i = 0; i < 50; i++) {
+            let s = document.createElement('div');
+            s.className = i === 0 ? 'star glowing' : 'star';
+            let size = i === 0 ? 6 : Math.random() * 3 + 1;
+            s.style.width = `${size}px`;
+            s.style.height = `${size}px`;
+            s.style.top = `${Math.random() * 100}%`;
+            s.style.left = `${Math.random() * 100}%`;
+            s.style.animationDelay = `${Math.random() * 4}s`;
+            starfield.appendChild(s);
         }
 
         // Animations: Scroll Observer
